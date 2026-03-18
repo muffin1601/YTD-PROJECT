@@ -1,0 +1,153 @@
+.reachSection {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #000;
+  padding: 10rem 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+  z-index: 10;
+}
+
+.header {
+  margin-bottom: 8rem;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  letter-spacing: 0.6rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  font-style: italic;
+  color: #fff;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  margin-bottom: 10rem;
+}
+
+.statCard {
+  position: relative;
+  padding: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.statCard:hover::before {
+  transform: translateX(100%);
+}
+
+.statNumber {
+  font-size: 6rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  font-family: var(--font-main);
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  letter-spacing: 0.3rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.mapContainer {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mapSvg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  filter: drop-shadow(0 0 20px var(--accent));
+}
+
+.mapPoints {
+  position: absolute;
+  inset: 0;
+}
+
+.point {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--accent);
+}
+
+.pulse {
+  position: absolute;
+  inset: -100%;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  animation: pulse 3s infinite ease-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+.connectionLine {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.2;
+  transform-origin: left center;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

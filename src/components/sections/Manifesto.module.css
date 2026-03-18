@@ -1,0 +1,105 @@
+.manifestoSection {
+  position: relative;
+  min-height: 120vh;
+  width: 100%;
+  background-color: #000;
+  padding: 15rem 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 1800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+  z-index: 10;
+}
+
+.layers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.layer {
+  font-size: clamp(6rem, 20vw, 25rem);
+  font-weight: 900;
+  white-space: nowrap;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.layerOutline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+}
+
+.layerSolid {
+  color: rgba(255, 255, 255, 0.02);
+}
+
+.mainContent {
+  position: relative;
+  z-index: 10;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.preTitle {
+  font-size: 1rem;
+  letter-spacing: 0.8rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  display: block;
+}
+
+.mainHeading {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 4rem;
+}
+
+.highlight {
+  font-weight: 800;
+  font-style: italic;
+  display: inline-block;
+  color: #fff;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.decorLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(229, 204, 168, 0.1), transparent);
+  transform: rotate(-15deg);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 30px;
+  }
+}

@@ -1,0 +1,72 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.columnsContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.column {
+  flex: 1;
+  background-color: #000;
+  height: 100%;
+}
+
+.centerContent {
+  position: relative;
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.percentage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+
+.number {
+  font-size: clamp(4rem, 15vw, 10rem);
+  font-weight: 100;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-family: var(--font-main);
+}
+
+.label {
+  font-size: 0.8rem;
+  letter-spacing: 0.5rem;
+  margin-top: 1rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loaderLogo {
+  height: 150px;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .brand {
+    letter-spacing: 0.8rem;
+    text-indent: 0.8rem;
+  }
+}
