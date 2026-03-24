@@ -40,21 +40,14 @@ export default function Process() {
 
   const scrollY1 = useTransform(scrollYProgress, [0, 1], [-150, 150]);
   const scrollY2 = useTransform(scrollYProgress, [0, 1], [150, -150]);
-  const titleX = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
     <section ref={containerRef} className={styles.processSection} id="process">
-     
-      <div className={styles.bgTitleContainer}>
-        <motion.h2 
-          style={{ x: titleX }}
-          className={styles.bgTitle}
-        >
-          OUR PROCESS • OUR PROCESS
-        </motion.h2>
-      </div>
+      
 
-      <div className={styles.decorLines}>
+
+
+      {/* <div className={styles.decorLines}>
         <motion.div 
           className={styles.diagonalLine}
           style={{ y: scrollY1 }}
@@ -69,9 +62,35 @@ export default function Process() {
           whileInView={{ scaleY: 1, opacity: 0.1 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         ></motion.div>
-      </div>
+      </div> */}
 
       <div className={styles.container}>
+        <div className={styles.header}>
+          <span className={styles.subtitle}>
+            STAGES OF CREATION
+          </span>
+          <div className={styles.titleWrapper}>
+            <motion.h2 
+              initial={{ x: -100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className={styles.title}
+            >
+              OUR
+            </motion.h2>
+            <motion.h2 
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className={`${styles.title} ${styles.titleRight}`}
+            >
+              PROCESS
+            </motion.h2>
+          </div>
+        </div>
+
         <div className={styles.grid}>
           {processSteps.map((step, idx) => (
             <ProcessCard key={step.id} step={step} idx={idx} />
@@ -101,8 +120,11 @@ function ProcessCard({ step, idx }: { step: typeof processSteps[0], idx: number 
   const rotateY = useTransform(mouseXSpring, [0, 1], [-10, 10]);
 
 
-  const scrollRotateX = useTransform(scrollYProgress, [0, 1], [5, -5]);
-  const scrollRotateZ = useTransform(scrollYProgress, [0, 1], [idx % 2 === 0 ? -2 : 2, idx % 2 === 0 ? 2 : -2]);
+  const scrollRotateX = useTransform(scrollYProgress, [0, 0.4, 1], [20, 0, -10]);
+  const scrollRotateY = useTransform(scrollYProgress, [0, 0.4, 1], [idx % 2 === 0 ? -10 : 10, 0, idx % 2 === 0 ? 5 : -5]);
+  const scrollZ = useTransform(scrollYProgress, [0, 0.4, 1], [-50, 0, -30]);
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = cardRef.current?.getBoundingClientRect();
@@ -136,10 +158,11 @@ function ProcessCard({ step, idx }: { step: typeof processSteps[0], idx: number 
         delay: idx * 0.1
       }}
       style={{
-        rotateX: rotateX,
-        rotateY: rotateY,
-        rotateZ: scrollRotateZ,
-        perspective: 1500,
+        rotateX: scrollRotateX,
+        rotateY: scrollRotateY,
+        z: scrollZ,
+        opacity: scrollOpacity,
+        perspective: 2000,
         transformStyle: "preserve-3d"
       }}
     >
@@ -149,14 +172,17 @@ function ProcessCard({ step, idx }: { step: typeof processSteps[0], idx: number 
         style={{ backgroundImage: `url(${step.image})` }}
       />
 
-      <div className={styles.cardHeader} style={{ transform: "translateZ(50px)" }}>
+      <div className={styles.cardHeader}>
+        <div className={styles.numberWrapper}>
+           <span className={styles.stepNumberIn}>{step.id}</span>
+           <div className={styles.numberLine}></div>
+        </div>
         <h3 className={styles.stepTitle}>
           {step.title}
         </h3>
-        <span className={styles.stepNumber}>{step.id}</span>
       </div>
       
-      <div className={styles.cardContent} style={{ transform: "translateZ(30px)" }}>
+      <div className={styles.cardContent}>
         <p className={styles.stepDesc}>{step.desc}</p>
       </div>
 

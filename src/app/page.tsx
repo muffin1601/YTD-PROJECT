@@ -6,8 +6,10 @@ import Process from "@/components/sections/Process";
 // import Manifesto from "@/components/sections/Manifesto";
 // import Reach from "@/components/sections/Reach";
 import Contact from "@/components/sections/Contact";
+import Footer from "@/components/ui/Footer";
 
 import About from "@/components/sections/About";
+import Reviews from "@/components/sections/Reviews";
 
 export default function Home() {
   return (
@@ -27,14 +29,11 @@ export default function Home() {
       
       <Reach /> */}
       
+      <Reviews />
+
       <Contact />
 
-      <footer style={{ padding: '60px 60px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-        <img src="/logo.png" alt="NKEY" style={{ height: '100px', opacity: 0.5 }} />
-        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', letterSpacing: '2px' }}>
-          © {new Date().getFullYear()} YTD ARCHITECTS. ALL RIGHTS RESERVED.
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

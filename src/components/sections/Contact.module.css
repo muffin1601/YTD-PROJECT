@@ -1,164 +1,318 @@
-.contactSection {
+.section {
   position: relative;
-  width: 100%;
-  padding: 1rem 0 12rem; /* Reduced from 15rem */
   background-color: var(--background);
+  color: #fff;
+  padding: 120px 0 150px;
   overflow: hidden;
 }
 
-.container {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 60px;
-  position: relative;
-  z-index: 10;
-}
-
-.bgText {
+/* Decorative Background Lines */
+.topDecoration {
   position: absolute;
-  top: 10%;
+  top: 0;
   left: 0;
-  font-size: 20vw;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.02);
-  white-space: nowrap;
+  width: 100%;
   pointer-events: none;
-  line-height: 0.8;
   z-index: 1;
 }
 
+.horizontalLine {
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  opacity: 0.15;
+  position: absolute;
+  top: 60px;
+}
+
+.diagonalContainer {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 120px;
+}
+
+.diagonalLeft, .diagonalRight {
+  position: absolute;
+  width: 1px;
+  height: 150px;
+  background-color: var(--accent);
+  opacity: 0.5;
+  top: 10px;
+}
+
+.diagonalLeft {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: top left;
+}
+
+.diagonalRight {
+  right: 0;
+  transform: rotate(-45deg);
+  transform-origin: top right;
+}
+
+/* Base Layout */
+.portfolioFeedback {
+  position: relative;
+  z-index: 2;
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
 .header {
-  text-align: center;
-  margin-bottom: 10rem;
+  margin-bottom: 6rem;
 }
 
-.titleMain {
-  font-size: clamp(3rem, 8vw, 7rem);
-  font-weight: 800;
-  font-style: italic;
-  color: #fff;
-  letter-spacing: -3px;
-  line-height: 1;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-
-.titleSub {
-  font-size: 1rem;
+.subtitle {
+  font-size: 0.8rem;
   letter-spacing: 0.6rem;
   color: var(--accent);
   text-transform: uppercase;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2rem;
 }
 
-.formBox {
-  background: rgba(30, 30, 30, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 6rem;
-  border-radius: 2px;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-  transform-style: preserve-3d;
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-main);
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.titleRight {
+  margin-left: 2rem;
+}
+
+.italic {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 1200px;
+}
+
+
+/* Form Grid */
+.form {
+  width: 100%;
 }
 
 .formGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem 4rem;
+  gap: 0 80px;
 }
 
-.inputField {
-  flex: 1;
+.formItem {
+  margin-bottom: 40px;
+  position: relative;
+  width: 100%;
+}
+
+.splitItem {
   display: flex;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  width: 100%;
   flex-direction: column;
-  gap: 1rem;
 }
 
-.inputField.full {
-  grid-column: span 2;
-}
-
-.label {
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.3);
-  text-transform: uppercase;
-}
-
-.input, .select {
+/* Inputs & Selects */
+.inputElement, .selectElement {
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 0;
+  padding: 10px 0;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 15px;
+  font-family: var(--font-main);
   font-weight: 300;
-  width: 100%;
-  transition: all 0.4s ease;
-}
-
-.input:focus, .select:focus {
   outline: none;
+  transition: all 0.4s ease;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.inputElement:focus, .selectElement:focus {
   border-bottom-color: var(--accent);
-  padding-left: 1rem;
 }
 
-.submitArea {
-  grid-column: span 2;
-  display: flex;
-  justify-content: center;
-  margin-top: 6rem;
+.inputElement::placeholder {
+  color: transparent;
 }
 
-.sendBtn {
+/* Special Case for Phone Placeholder (grey text visible) */
+.phoneInput::placeholder {
+  color: rgba(255, 255, 255, 0.3) !important;
+  font-weight: 400;
+}
+.phoneInput {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Floating labels for inputs */
+.formItemLabel {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.inputElement:focus ~ .formItemLabel,
+.inputElement:not(:placeholder-shown) ~ .formItemLabel {
+  top: -15px;
+  font-size: 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Select specific styling */
+.selectWrapper {
   position: relative;
-  width: 300px;
-  height: 120px;
-  background: var(--background);
-  border: 1px solid rgba(229, 204, 168, 0.2);
-  cursor: pointer;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
 }
 
-.btnText {
-  font-size: 1.2rem;
-  letter-spacing: 12px;
+.selectElement {
+  appearance: none;
+  cursor: pointer;
+  font-weight: 600; /* User image shows "Interior design" in bold */
+}
+
+.mutedSelect {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6); /* Muted bold for 'Select Country' */
+}
+
+.selectElement option {
+  background: var(--background);
   color: #fff;
   font-weight: 300;
-  z-index: 10;
-  transition: color 0.4s ease;
 }
 
-.sendBtn::before {
-  content: '';
+.dropdownArrow {
   position: absolute;
-  inset: 0;
-  background: var(--accent);
-  transform: translateY(100%);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  right: 0;
+  bottom: 15px;
+  font-size: 10px;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.sendBtn:hover {
+/* Floating label above select */
+.formFloatLabel {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 5px;
+}
+
+/* Submit Button */
+.formSubmit {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.submitBtn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(198, 166, 103, 0.4); /* accent border */
+  padding: 24px 60px;
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  min-width: 250px;
+}
+
+.submitBtn:hover {
+  background: rgba(198, 166, 103, 0.1);
   border-color: var(--accent);
-  transform: scale(1.05);
-  box-shadow: 0 20px 50px rgba(198, 166, 103, 0.2);
 }
 
-.sendBtn:hover .btnText {
-  color: #000;
-  font-weight: 600;
+/* Background Diamonds (matching the screenshot exactly) */
+.bgDiamond1, .bgDiamond2, .bgDiamond3 {
+  position: absolute;
+  border: 1px solid rgba(198, 166, 103, 0.2);
+  z-index: 0;
+  pointer-events: none;
+  transform: rotate(45deg);
 }
 
-.sendBtn:hover::before {
-  transform: translateY(0);
+/* Left Overlapping Diamonds */
+.bgDiamond1 {
+  width: 180px;
+  height: 180px;
+  left: -90px;
+  top: 30%;
+}
+.bgDiamond2 {
+  width: 180px;
+  height: 180px;
+  left: -90px;
+  top: 45%;
 }
 
-@media (max-width: 1024px) {
-  .formGrid { grid-template-columns: 1fr; }
-  .formBox { padding: 4rem 2rem; }
-  .inputField.full { grid-column: span 1; }
+/* Right Big Diamond */
+.bgDiamond3 {
+  width: 300px;
+  height: 300px;
+  right: -150px;
+  top: 15%;
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 40px 0;
+  }
+  
+  .splitItem {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .horizontalLine, .diagonalContainer {
+    display: none; /* Hide complex desktop decorations on mobile */
+  }
+
+  .formTitle {
+    font-size: 32px;
+  }
+  
+  .bgDiamond1, .bgDiamond2, .bgDiamond3 {
+    opacity: 0.2;
+  }
 }

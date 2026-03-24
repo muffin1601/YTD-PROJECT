@@ -50,7 +50,26 @@ export default function ProjectGrid() {
         <div className={styles.header}>
           <div className={styles.headerTitle}>
             <span className={styles.subtitle}>Curated Works</span>
-            <h2 className={styles.title}>SELECTED PROJECTS</h2>
+            <div className={styles.titleWrapper}>
+              <motion.h2 
+                initial={{ x: -100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className={styles.title}
+              >
+                SELECTED
+              </motion.h2>
+              <motion.h2 
+                initial={{ x: 100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                className={`${styles.title} ${styles.titleRight}`}
+              >
+                PROJECTS
+              </motion.h2>
+            </div>
           </div>
           <p className={styles.headerDesc}>
             Exploring the intersection of geometry, light, and natural materials to create timeless architectural narratives.
@@ -93,9 +112,14 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
   const rotateX = useTransform(mouseYSpring, [0, 1], [7, -7]);
   const rotateY = useTransform(mouseXSpring, [0, 1], [-7, 7]);
 
-  const imgY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
-  const textY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const scrollRotateZ = useTransform(scrollYProgress, [0, 1], [index % 2 === 0 ? -2 : 2, index % 2 === 0 ? 2 : -2]);
+  const scrollRotateX = useTransform(scrollYProgress, [0, 0.4, 1], [30, 0, -10]);
+  const scrollRotateY = useTransform(scrollYProgress, [0, 0.4, 1], [index % 2 === 0 ? -15 : 15, 0, index % 2 === 0 ? 5 : -5]);
+  const scrollZ = useTransform(scrollYProgress, [0, 0.4, 1], [-100, 0, -50]);
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const scrollScale = useTransform(scrollYProgress, [0, 0.4], [0.8, 1]);
+
+  const imgY = useTransform(scrollYProgress, [0, 1], [-80, 80]);
+  const textY = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = cardRef.current?.getBoundingClientRect();
@@ -125,10 +149,12 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
       style={{ 
-        rotateX: rotateX, 
-        rotateY: rotateY,
-        rotateZ: scrollRotateZ, 
-        perspective: 1500,
+        rotateX: scrollRotateX, 
+        rotateY: scrollRotateY,
+        z: scrollZ,
+        scale: scrollScale,
+        opacity: scrollOpacity,
+        perspective: 2000,
         transformStyle: "preserve-3d"
       }}
     >
