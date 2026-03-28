@@ -1,211 +1,201 @@
-.processSection {
+.root { 
   position: relative;
+  /* Adjust height based on number of slides */
   height: 500vh;
-  background: #111;
-  z-index: 15;
+  background-color: #0c0c0c;
+  color: #fff;
 }
 
-.stickyContainer {
+/* ------- STICKY PANEL ------- */
+.sticky {
   position: sticky;
   top: 0;
   height: 100vh;
-  width: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+/* ------- TITLE THAT SCALES DOWN OFF THE TOP ------- */
+.headlineWrap {
+  position: absolute;
+  top: 50%; /* Center the entry title like other sections */
+  left: 5vw;
+  transform: translateY(-50%);
+  pointer-events: none;
   z-index: 5;
 }
 
-.bgTextDecor {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  font-size: 15vw;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.027);
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 1;
-  line-height: 1;
-}
-
-.header {
-  position: relative;
-  z-index: 20;
-  padding: 8vh 8vw 0;
-}
-
-.subtitle {
-  font-size: 0.8rem;
-  letter-spacing: 0.5rem;
-  color: var(--accent);
+.premiumLabel {
+  font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
-  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--accent, #a68e65);
   display: block;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
-.titleWrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.title {
-  font-size: clamp(3rem, 10vw, 7rem);
+.headline {
+  font-size: clamp(2.5rem, 6vw, 7rem);
   font-weight: 900;
-  font-style: italic;
-  color: #ffffff;
-  margin: 0;
-  line-height: 0.9;
+  letter-spacing: -0.04em;
+  line-height: 1;
   text-transform: uppercase;
+  margin: 0;
+  color: #fff;
 }
 
-.titleRight {
-  margin-left: 10vw;
-  font-weight: 100;
-  font-style: normal;
-  opacity: 0.8;
-}
-
-.diagonalWrapper {
+/* ------- SLIDE LAYOUT ------- */
+.slidesWrap {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  top: 500px;
+  /* Allow scroll events to pass through to the document */
+  pointer-events: none;
 }
 
-.processList {
-  display: flex;
-  gap: 20vw;
-  align-items: flex-start;
-  will-change: transform;
-}
-
-.processCard {
-  min-width: 450px;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 3rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transform: rotate(-22deg); /* Increased tilt */
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.processCard:hover {
-  background: var(--accent);
-  transform: rotate(0deg) scale(1.05);
-  z-index: 50;
-  border-color: var(--accent);
-}
-
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.cardIndex {
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: var(--accent);
-}
-
-.processCard:hover .cardIndex {
-  color: #000;
-}
-
-.cardTitle {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.processCard:hover .cardTitle {
-  color: #000;
-}
-
-.cardImageContainer {
-  width: 100%;
-  aspect-ratio: 4/5;
-  overflow: hidden;
-  background: #000;
-}
-
-.cardImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(100%) brightness(0.6);
-  transition: all 0.5s ease;
-}
-
-.processCard:hover .cardImage {
-  filter: grayscale(0%) brightness(1);
-}
-
-.cardDesc {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.4);
-  font-weight: 300;
-}
-
-.processCard:hover .cardDesc {
-  color: #000;
-}
-
-.diamondBadge {
+.slide {
   position: absolute;
-  bottom: 8vh;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 140px;
-  height: 140px;
-  border: 1px solid var(--accent);
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000;
+  padding: 0 5vw;
+  gap: 4vw;
+  /* Re-enable pointer events on the slide itself */
+  pointer-events: auto;
+}
+
+/* ------- MAIN IMAGE ------- */
+.mainImageWrap {
+  position: relative;
+  width: clamp(300px, 48vw, 760px);
+  height: clamp(380px, 65vh, 900px);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.mainImage {
+  object-fit: cover;
+}
+
+/* ------- THUMBNAIL (corner) ------- */
+.thumbWrap {
+  position: absolute;
+  width: clamp(120px, 15vw, 220px);
+  height: clamp(120px, 15vw, 220px);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   z-index: 20;
-  transition: all 0.4s ease;
-  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.diamondBadge:hover {
-  background: var(--accent);
+.thumbTopLeft {
+  top: 6vh;
+  left: 6vw;
 }
 
-.diamondText {
-  transform: rotate(-45deg);
+.thumbBottomRight {
+  bottom: 5vh;
+  right: 20vw;
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+/* ------- RIGHT CONTENT BLOCK ------- */
+.content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
+  gap: 1.5rem;
+  max-width: 400px;
+  flex-shrink: 0;
+}
+
+.slideNum {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.45;
+  letter-spacing: 0.05em;
+  color: var(--accent, #a68e65);
+}
+
+.slideText {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cardTitle {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 900;
   color: #fff;
-  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.diamondBadge:hover .diamondText {
-  color: #000;
+.slideLink {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
 }
 
-@media (max-width: 1024px) {
-  .processList {
+.slideLink:hover {
+  opacity: 0.6;
+}
+
+/* ------- MOBILE ADJUSTMENTS ------- */
+@media (max-width: 900px) {
+  .slide {
     flex-direction: column;
-    padding: 10rem 0;
+    justify-content: center;
+    padding-top: 5vh;
   }
-  .processCard {
-    min-width: 90vw;
-    transform: rotate(0);
+
+  .mainImageWrap {
+    width: 90vw;
+    height: 40vh;
+  }
+
+  .content {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .thumbWrap {
+    display: none;
+  }
+
+  .headlineWrap {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
   }
 }
