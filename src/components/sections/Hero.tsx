@@ -42,8 +42,8 @@ export default function Hero() {
   };
 
   const textLines = [
-    "FULL CYCLE STUDIO",
-    "OF DESIGN AND ARCHITECTURE"
+    "TRANSFORMING VISION",
+    "INTO ARCHITECTURAL REALITY"
   ];
 
   return (
@@ -116,7 +116,7 @@ export default function Hero() {
       <motion.div className={styles.background} style={{ scale }}>
         <div className={styles.overlay}></div>
         <img 
-          src="https://nkeyarchitects.com/wp-content/uploads/2025/06/sl-home1.jpg" 
+          src="/banner.jpeg" 
           alt="Architectural Design" 
           className={styles.bgImage}
         />

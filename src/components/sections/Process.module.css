@@ -1,29 +1,49 @@
 .processSection {
   position: relative;
-  min-height: 100vh;
+  height: 500vh;
+  background: #111;
+  z-index: 15;
+}
+
+.stickyContainer {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   width: 100%;
-  padding: 10rem 0;
-  background-color: var(--background);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+}
+
+.bgTextDecor {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 15vw;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.027);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  line-height: 1;
 }
 
 .header {
-  text-align: left;
-  margin-bottom: 10rem;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 60px;
+  position: relative;
+  z-index: 20;
+  padding: 8vh 8vw 0;
 }
 
 .subtitle {
   font-size: 0.8rem;
-  letter-spacing: 0.6rem;
+  letter-spacing: 0.5rem;
   color: var(--accent);
   text-transform: uppercase;
   font-weight: 600;
   display: block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .titleWrapper {
@@ -32,10 +52,9 @@
 }
 
 .title {
-  font-family: var(--font-main);
-  font-size: 64px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 900;
+  font-style: italic;
   color: #ffffff;
   margin: 0;
   line-height: 0.9;
@@ -43,146 +62,126 @@
 }
 
 .titleRight {
-  margin-left: 4rem;
+  margin-left: 10vw;
+  font-weight: 100;
+  font-style: normal;
+  opacity: 0.8;
 }
 
-
-.container {
-  max-width: 1600px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 60px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: rgba(255, 255, 255, 0.05); /* Grid lines */
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.card {
-  position: relative;
-  min-height: 600px;
-  background: var(--background);
-  padding: 4rem 3rem;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
-}
-
-.card:hover {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.numberWrapper {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.stepNumberIn {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #ffffff;
-  font-family: var(--font-main);
-}
-
-.numberLine {
-  height: 1px;
-  flex: 1;
-  background: rgba(255, 255, 255, 0.1);
-  transition: all 0.6s ease;
-}
-
-.card:hover .numberLine {
-  background: var(--accent);
-  transform: scaleX(1.1);
-  transform-origin: left;
-}
-
-.stepTitle {
-  font-family: var(--font-main);
-  font-size: 1.8rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: #ffffff;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.cardContent {
-  margin-top: auto;
-}
-
-.stepDesc {
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.4);
-  font-weight: 300;
-  transition: color 0.4s ease;
-}
-
-.card:hover .stepDesc {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.cardBgImage {
+.diagonalWrapper {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  filter: grayscale(100%) brightness(0.5);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  top: 500px;
 }
 
-.card:hover .cardBgImage {
-  opacity: 0.15;
-  transform: scale(1.1);
+.processList {
+  display: flex;
+  gap: 20vw;
+  align-items: flex-start;
+  will-change: transform;
 }
 
-.cardHeader,
-.cardContent {
-  position: relative;
-  z-index: 2;
+.processCard {
+  min-width: 450px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transform: rotate(-22deg); /* Increased tilt */
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
+.processCard:hover {
   background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 3;
+  transform: rotate(0deg) scale(1.05);
+  z-index: 50;
+  border-color: var(--accent);
 }
 
-.card:hover::before {
-  transform: scaleX(1);
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
+.cardIndex {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.processCard:hover .cardIndex {
+  color: #000;
+}
+
+.cardTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.processCard:hover .cardTitle {
+  color: #000;
+}
+
+.cardImageContainer {
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: #000;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.6);
+  transition: all 0.5s ease;
+}
+
+.processCard:hover .cardImage {
+  filter: grayscale(0%) brightness(1);
+}
+
+.cardDesc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 300;
+}
+
+.processCard:hover .cardDesc {
+  color: #000;
+}
 
 .diamondBadge {
   position: absolute;
-  bottom: 10%;
-  left: 37%;
-  width: 120px;
-  height: 120px;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 140px;
+  height: 140px;
   border: 1px solid var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
   background: #000;
   z-index: 20;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.diamondBadge:hover {
+  background: var(--accent);
 }
 
 .diamondText {
@@ -190,40 +189,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 2px;
   color: #fff;
-  font-weight: 600;
-  text-align: center;
+  font-weight: 700;
 }
 
-.diamondText span:first-child {
-  opacity: 0.6;
+.diamondBadge:hover .diamondText {
+  color: #000;
 }
 
-@media (max-width: 1200px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1024px) {
+  .processList {
+    flex-direction: column;
+    padding: 10rem 0;
+  }
+  .processCard {
+    min-width: 90vw;
+    transform: rotate(0);
   }
 }
-
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .header {
-    padding: 0 30px;
-    margin-bottom: 5rem;
-  }
-  .title {
-    font-size: 4rem;
-  }
-  .container {
-    padding: 0;
-  }
-  .card {
-    min-height: auto;
-    padding: 4rem 2rem;
-  }
-}
-

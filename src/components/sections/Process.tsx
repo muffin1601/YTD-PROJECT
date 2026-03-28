@@ -1,33 +1,33 @@
 'use client';
 
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 import styles from './Process.module.css';
 
 const processSteps = [
   {
     id: '01',
-    title: 'START',
-    desc: 'We start by studying your project, taking all needed measurements and choosing style for it.',
-    image: '/2J3A7880-HDR.jpg'
+    title: 'CONCEPT',
+    desc: 'Every masterpiece begins with a deep exploration of space, context, and the client\'s unique aspirations.',
+    image: '/2J3A7901 copy.jpg'
   },
   {
     id: '02',
-    title: 'PLAN',
-    desc: 'Then, we process a point-by-point plan and present several examples for you.',
-    image: '/2J3A7892-HDR.jpg'
+    title: 'DESIGN',
+    desc: 'We translate abstract ideas into precise architectural diagrams and functional layouts that define the soul of the project.',
+    image: '/SOFA WALL.jpg (2).jpeg'
   },
   {
     id: '03',
-    title: 'VISUALIZATION',
-    desc: 'At this stage we create detailed visualization for each room to provide you with an overall picture.',
-    image: '/DSC_9276.jpg'
+    title: 'CRAFTING',
+    desc: 'Experience the future through hyper-realistic digital twin visualizations for each interior and structural element.',
+    image: '/Picture10.jpg'
   },
   {
     id: '04',
-    title: 'ALBUM',
-    desc: 'The design project album with all plans and visualizations is ready.',
-    image: '/BED WALL.jpg.jpeg'
+    title: 'DELIVERY',
+    desc: 'A comprehensive architectural portfolio containing technical blueprints and final visualizations is finalized for execution.',
+    image: '/Picture8.jpg'
   }
 ];
 
@@ -35,164 +35,61 @@ export default function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start start", "end end"]
   });
 
-  const scrollY1 = useTransform(scrollYProgress, [0, 1], [-150, 150]);
-  const scrollY2 = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  // Diagonal movement: both X and Y
+  const x = useTransform(smoothProgress, [0, 1], ["30%", "-80%"]);
+  const y = useTransform(smoothProgress, [0, 1], ["30%", "-80%"]);
+  const bgX = useTransform(smoothProgress, [0, 1], ["0%", "-40%"]);
 
   return (
     <section ref={containerRef} className={styles.processSection} id="process">
-      
+      <div className={styles.stickyContainer}>
+        <motion.div style={{ x: bgX }} className={styles.bgTextDecor}>
+          STAGES WORK STAGES WORK STAGES WORK
+        </motion.div>
 
-
-
-      {/* <div className={styles.decorLines}>
-        <motion.div 
-          className={styles.diagonalLine}
-          style={{ y: scrollY1 }}
-          initial={{ scaleY: 0, opacity: 0 }}
-          whileInView={{ scaleY: 1, opacity: 0.1 }}
-          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        ></motion.div>
-        <motion.div 
-          className={styles.diagonalLine}
-          style={{ y: scrollY2 }}
-          initial={{ scaleY: 0, opacity: 0 }}
-          whileInView={{ scaleY: 1, opacity: 0.1 }}
-          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        ></motion.div>
-      </div> */}
-
-      <div className={styles.container}>
         <div className={styles.header}>
-          <span className={styles.subtitle}>
-            STAGES OF CREATION
-          </span>
-          <div className={styles.titleWrapper}>
-            <motion.h2 
-              initial={{ x: -100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className={styles.title}
-            >
-              OUR
-            </motion.h2>
-            <motion.h2 
-              initial={{ x: 100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className={`${styles.title} ${styles.titleRight}`}
-            >
-              PROCESS
-            </motion.h2>
-          </div>
+            <span className={styles.subtitle}>
+              STAGES OF WORK
+            </span>
+            <div className={styles.titleWrapper}>
+              <h2 className={styles.title}>ARCHITECTURE, THAT</h2>
+              <h2 className={`${styles.title} ${styles.titleRight}`}>REDEFINES LIVING</h2>
+            </div>
         </div>
 
-        <div className={styles.grid}>
-          {processSteps.map((step, idx) => (
-            <ProcessCard key={step.id} step={step} idx={idx} />
-          ))}
+        <div className={styles.diagonalWrapper}>
+          <motion.div style={{ x, y }} className={styles.processList}>
+            {processSteps.map((step, idx) => (
+              <div key={step.id} className={styles.processCard}>
+                 <div className={styles.cardHeader}>
+                    <span className={styles.cardIndex}>{step.id}</span>
+                    <h3 className={styles.cardTitle}>{step.title}</h3>
+                 </div>
+                 <div className={styles.cardImageContainer}>
+                    <img src={step.image} alt={step.title} className={styles.cardImage} />
+                 </div>
+                 <p className={styles.cardDesc}>{step.desc}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
+
+        {/* <div className={styles.diamondBadge}>
+          <div className={styles.diamondText}>
+             <span>FREE</span>
+             <span>3D TOUR</span>
+          </div>
+        </div> */}
       </div>
     </section>
-  );
-}
-
-function ProcessCard({ step, idx }: { step: typeof processSteps[0], idx: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "end start"]
-  });
-
-
-  const x = useMotionValue(0.5);
-  const y = useMotionValue(0.5);
-
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-
-  const rotateX = useTransform(mouseYSpring, [0, 1], [10, -10]);
-  const rotateY = useTransform(mouseXSpring, [0, 1], [-10, 10]);
-
-
-  const scrollRotateX = useTransform(scrollYProgress, [0, 0.4, 1], [20, 0, -10]);
-  const scrollRotateY = useTransform(scrollYProgress, [0, 0.4, 1], [idx % 2 === 0 ? -10 : 10, 0, idx % 2 === 0 ? 5 : -5]);
-  const scrollZ = useTransform(scrollYProgress, [0, 0.4, 1], [-50, 0, -30]);
-  const scrollOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (rect) {
-      const width = rect.width;
-      const height = rect.height;
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-      x.set(mouseX / width);
-      y.set(mouseY / height);
-    }
-  }
-
-  function handleMouseLeave() {
-    x.set(0.5);
-    y.set(0.5);
-  }
-
-  return (
-    <motion.div 
-      ref={cardRef}
-      className={`${styles.card} ${styles[`card-${idx + 1}`]}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 50, rotateX: 20 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ 
-        duration: 1.2, 
-        ease: [0.16, 1, 0.3, 1],
-        delay: idx * 0.1
-      }}
-      style={{
-        rotateX: scrollRotateX,
-        rotateY: scrollRotateY,
-        z: scrollZ,
-        opacity: scrollOpacity,
-        perspective: 2000,
-        transformStyle: "preserve-3d"
-      }}
-    >
-      {/* Background image that reveals on hover */}
-      <div 
-        className={styles.cardBgImage}
-        style={{ backgroundImage: `url(${step.image})` }}
-      />
-
-      <div className={styles.cardHeader}>
-        <div className={styles.numberWrapper}>
-           <span className={styles.stepNumberIn}>{step.id}</span>
-           <div className={styles.numberLine}></div>
-        </div>
-        <h3 className={styles.stepTitle}>
-          {step.title}
-        </h3>
-      </div>
-      
-      <div className={styles.cardContent}>
-        <p className={styles.stepDesc}>{step.desc}</p>
-      </div>
-
-      <motion.div 
-        className={styles.cardDiagonal}
-        initial={{ scaleY: 0 }}
-        whileInView={{ scaleY: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, delay: 0.5 + idx * 0.1 }}
-      ></motion.div>
-    </motion.div>
   );
 }

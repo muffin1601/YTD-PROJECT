@@ -9,94 +9,96 @@ export default function About() {
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"]
+    offset: ["start start", "end end"]
   });
 
-  const springProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
+  const springProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
-  const numOpacity = useTransform(springProgress, [0, 0.2, 0.5], [0, 0.05, 0.02]);
-  const numScale = useTransform(springProgress, [0, 0.5], [0.8, 1.1]);
-  const imageScale = useTransform(springProgress, [0, 0.5], [1.2, 1]);
-  const clipWidth = useTransform(springProgress, [0.1, 0.4], ["20%", "100%"]);
+  // Floating background elements
+  const bgY = useTransform(springProgress, [0, 1], ["0%", "-20%"]);
+  const bgScale = useTransform(springProgress, [0, 1], [1, 1.2]);
   
-  // Link lines to start appearing as soon as section enters
-  const lineY = useTransform(springProgress, [0.1, 0.4], ["100%", "0%"]);
-  const lineOpacity = useTransform(springProgress, [0.1, 0.3], [0, 1]);
+  // Staggered text movement
+  const textX1 = useTransform(springProgress, [0, 0.5], ["0%", "-10%"]);
+  const textX2 = useTransform(springProgress, [0.2, 0.7], ["0%", "15%"]);
+  const textX3 = useTransform(springProgress, [0.4, 0.9], ["0%", "-5%"]);
 
-  const lines = [
-    { text: "10 YEARS", type: "bold" },
-    { text: "EXPERIENCE", type: "bold" },
-    { text: "IN COMBINATION", type: "thin" },
-    { text: "WITH", type: "thin" },
-    { text: "A PERFECT", type: "bold" },
-    { text: "TASTE", type: "bold" }
-  ];
+  // Image reveal circle
+  const imageClip = useTransform(springProgress, [0, 1], [" circle(20% at 50% 50%)", "circle(100% at 50% 50%)"]);
+  const imageY = useTransform(springProgress, [0, 1], ["10%", "-10%"]);
 
   return (
     <section ref={sectionRef} className={styles.aboutSection}>
-      <motion.div style={{ opacity: numOpacity, scale: numScale }} className={styles.bgNumber}>10</motion.div>
-      
-      <div className={styles.container}>
-        <div className={styles.textContent}>
-           <div className={styles.headLineWrapper}>
-              {lines.map((line, i) => (
-                <div key={i} className={styles.line}>
-                   <motion.h2 
-                     className={`${styles.lineText} ${line.type === 'thin' ? styles.lineTextThin : ''}`}
-                     style={{ y: lineY, opacity: lineOpacity }}
-                   >
-                     {line.text}
-                   </motion.h2>
-                </div>
-              ))}
-           </div>
+      <div className={styles.stickyContainer}>
+        {/* Parallax Background Text */}
+        <motion.div 
+          style={{ y: bgY, scale: bgScale }} 
+          className={styles.bgText}
+        >
+          PHILOSOPHY OUR PHILOSOPHY PHILOSOPHY
+        </motion.div>
+        
+        <div className={styles.container}>
+          <div className={styles.textContent}>
+            <div className={styles.headLineWrapper}>
+              <motion.div style={{ x: textX1 }} className={styles.line}>
+                <h2 className={styles.lineText}>CRAFTING</h2>
+              </motion.div>
+              <motion.div style={{ x: textX2 }} className={styles.line}>
+                <h2 className={styles.lineText}>THE</h2>
+              </motion.div>
+              <motion.div style={{ x: textX3 }} className={styles.line}>
+                <h2 className={`${styles.lineText} ${styles.lineTextThin}`}>UNEXPECTED</h2>
+              </motion.div>
+              <motion.div style={{ x: textX1 }} className={styles.line}>
+                <h2 className={styles.lineText}>SYNERGY</h2>
+              </motion.div>
+            </div>
 
-           <div className={styles.bodyText}>
+            <div className={styles.bodyText}>
               <motion.p 
                 className={styles.pLead}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.5 }}
+                transition={{ duration: 1.2 }}
               >
-                 Our mission goes beyond creating aesthetically refined spaces.
+                At YTD Architects, we don’t just build structures; we curate emotional landscapes that harmonize the human spirit with the environment.
               </motion.p>
-              <motion.p 
-                className={styles.pSub}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.7 }}
-              >
-                 Through design, we help individuals uncover and express their inner world — 
-                 their character, values, and unspoken desires.
+              <motion.p className={styles.pSub}>
+                Our practice is dedicated to the pursuit of architectural purity and the creation of timeless spaces that redefine the dialogue between light, form, and material.
               </motion.p>
-           </div>
-        </div>
+            </div>
+          </div>
 
-        <div className={styles.imageContainer}>
-           <motion.div 
-             className={styles.imageFrame}
-             style={{ width: clipWidth }}
-           >
+          <div className={styles.imageRevealZone}>
+            <motion.div 
+              className={styles.imageMask}
+              style={{ clipPath: imageClip }}
+            >
               <motion.img 
                 src="/2J3A7880-HDR.jpg" 
-                alt="Architect" 
-                className={styles.portraitImage}
-                style={{ scale: imageScale }}
+                alt="Portrait" 
+                className={styles.aboutImg}
+                style={{ y: imageY }}
               />
-           </motion.div>
-           <div className={styles.decorLine}></div>
-           
-           <motion.div 
-             className={styles.contactBadge}
-             animate={{ rotate: 360 }}
-             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-           >
-              <span className={styles.contactBadgeText}>
-                 YTD • CONTACT • YTD •
-              </span>
-           </motion.div>
+            </motion.div>
+            
+            <motion.div 
+              className={styles.rotatingLabel}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            >
+              <svg viewBox="0 0 100 100" width="150" height="150">
+                <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                <text>
+                  <textPath xlinkHref="#circlePath" className={styles.svgText}>
+                    • YTD ARCHITECTS • DESIGN STUDIO •
+                  </textPath>
+                </text>
+              </svg>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

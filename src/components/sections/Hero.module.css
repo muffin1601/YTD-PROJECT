@@ -1,6 +1,5 @@
 .hero {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100vh;
   width: 100%;
   overflow: hidden;
@@ -8,7 +7,7 @@
   align-items: center;
   justify-content: center;
   background: #000;
-  z-index: 1;
+  z-index: 10;
 }
 
 .noise {
