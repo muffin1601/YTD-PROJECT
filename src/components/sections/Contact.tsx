@@ -31,7 +31,6 @@ export default function Contact() {
   const scale = useTransform(smoothProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
   const opacity = useTransform(smoothProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
- 
   const bgX = useTransform(smoothProgress, [0, 1], ["0%", "-30%"]);
 
   return (
