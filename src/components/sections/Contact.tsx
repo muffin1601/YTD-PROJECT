@@ -20,13 +20,11 @@ export default function Contact() {
     offset: ["start end", "end start"]
   });
 
-
   const smoothProgress = useSpring(scrollYProgress, { 
     stiffness: 80, 
     damping: 30,
     restDelta: 0.001 
   });
-
 
   const rotateX = useTransform(smoothProgress, [0, 0.5, 1], [isMobile ? 15 : 30, 0, isMobile ? -15 : -30]);
   const rotateY = useTransform(smoothProgress, [0, 0.5, 1], [isMobile ? -8 : -15, 0, isMobile ? 8 : 15]);
@@ -112,7 +110,6 @@ export default function Contact() {
                   <label className={styles.inputLabel}>YOUR MESSAGE</label>
                   <textarea className={styles.textarea} placeholder="Describe your vision..." rows={3}></textarea>
                 </div>
-
                 <button type="submit" className={styles.submitBtn}>
                    <span>SEND INQUIRY</span>
                 </button>

@@ -104,7 +104,14 @@ function AboutSectionCard({ title, subtitle, desc, image, index }: {
              <span className={styles.stepNum}>0{index + 1}</span>
           </div>
 
-          <motion.div style={{ y: textY }} className={styles.infoBox} style={{ textAlign: index % 2 !== 0 ? 'right' : 'left', alignItems: index % 2 !== 0 ? 'flex-end' : 'flex-start' }}>
+          <motion.div 
+            className={styles.infoBox} 
+            style={{ 
+              y: textY,
+              textAlign: index % 2 !== 0 ? 'right' : 'left', 
+              alignItems: index % 2 !== 0 ? 'flex-end' : 'flex-start' 
+            }}
+          >
              <span className={styles.subtitle}>{subtitle}</span>
              <h3 className={styles.title}>{title}</h3>
              <p className={styles.desc}>{desc}</p>
