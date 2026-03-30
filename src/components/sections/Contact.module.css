@@ -1,12 +1,12 @@
 .root {
   position: relative;
-  background: #111; /* User requested #111 */
+  background: #111; 
   color: #fff;
   width: 100%;
   padding-bottom: 10vh;
 }
 
-/* Atmospheric Background Marquee */
+
 .marqueeContainer {
   position: sticky;
   top: 25vh;
@@ -29,12 +29,11 @@
 }
 
 .mFilled {
-  color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.12); 
 }
 
 .mOutline {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.05);
 }
 
 .header {
@@ -63,8 +62,7 @@
 }
 
 .accentText {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.301);
 }
 
 .container {
@@ -79,12 +77,12 @@
 .contactCard {
   width: 100%;
   max-width: 1300px;
-  background: #000; /* Contrast against #111 */
+  background: #000; 
   border-radius: 4px;
   padding: 5rem;
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.03);
-  will-change: transform, opacity; /* Fix for mobile lag */
+  will-change: transform, opacity; 
 }
 
 .cardGrid {
@@ -301,7 +299,12 @@ select.input option {
      letter-spacing: 0.2rem;
   }
   .marqueeContainer {
-     display: none;
+     display: block; /* Enable for consistent atmospheric layer */
+     top: 10vh;
+  }
+  .marqueeTrack span {
+     font-size: clamp(2rem, 12vw, 3.5rem);
+     letter-spacing: 0.5rem;
   }
 }
 

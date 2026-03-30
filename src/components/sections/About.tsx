@@ -17,12 +17,12 @@ export default function About() {
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className={i % 2 === 0 ? styles.mOutline : styles.mFilled}>
-              PHILOSOPHY
+              ABOUT
             </span>
           ))}
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i + 8} className={i % 2 === 0 ? styles.mOutline : styles.mFilled}>
-              PHILOSOPHY
+              ABOUT
             </span>
           ))}
         </motion.div>

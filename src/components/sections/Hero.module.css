@@ -211,11 +211,31 @@
   .container {
     padding: 0 6vw;
   }
-  .line1, .line2 {
-    font-size: clamp(1.8rem, 12vw, 2.5rem);
+  .content {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .title {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .line1 {
+    font-size: clamp(1.8rem, 10vw, 2.4rem); /* Smaller white part */
+    font-weight: 900; /* Bold white part */
     line-height: 1.1;
+    width: 100%;
+    display: block;
+    text-align: center;
   }
   .line2 {
+    font-size: clamp(1.8rem, 10vw, 2.4rem); /* Original golden size */
+    font-weight: 300; /* Original weight */
+    line-height: 1.1;
+    width: 100%;
+    display: block;
+    text-align: center;
     padding-left: 0;
     margin-top: 5px;
   }

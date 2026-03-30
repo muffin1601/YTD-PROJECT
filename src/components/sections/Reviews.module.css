@@ -29,12 +29,11 @@
 }
 
 .mFilled {
-  color: rgba(255, 255, 255, 0.08); /* Sophisticated subtle fill */
+  color: rgba(255, 255, 255, 0.12); /* Consistent fill */
 }
 
 .mOutline {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05); /* Minimalist outline */
+  color: rgba(255, 255, 255, 0.05); /* Solid ghost-typography style */
 }
 
 .header {
@@ -244,6 +243,10 @@
 @media (max-width: 480px) {
   .marqueeContainer {
      top: 10vh;
+  }
+  .marqueeTrack span {
+     font-size: clamp(2rem, 12vw, 3.5rem);
+     letter-spacing: 0.5rem;
   }
   .headline {
      font-size: 1.8rem;

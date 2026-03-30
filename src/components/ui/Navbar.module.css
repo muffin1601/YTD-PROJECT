@@ -301,21 +301,52 @@
   }
   .menuOverlay {
     padding: 0 6vw;
+    text-align: center;
+  }
+  .overlayContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5vh;
+  }
+  .menuVisual {
+    display: none; /* Hide logo image in content area to save space */
+  }
+  .linksGrid {
+    width: 100%;
+    align-items: center;
+  }
+  .menuItem {
+    width: 100%;
+    text-align: center;
+  }
+  .menuLink {
+    justify-content: center;
+  }
+  .linkArrow {
+    display: none; /* Keep it clean and centered */
   }
   .footerCol {
     gap: 0.8rem;
+    align-items: center;
+    width: 100%;
   }
   .menuFooter {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 3vh;
     padding: 3vh 0;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
   .socialLinks {
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   .linkName {
     font-size: 1.2rem;
+    text-align: center;
   }
 }
