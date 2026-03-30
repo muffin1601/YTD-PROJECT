@@ -138,9 +138,68 @@
 }
 
 @media (max-width: 1024px) {
+  .aboutSection {
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 10vh;
+  }
+  .stickyContainer {
+    position: relative;
+    height: auto;
+    padding: 10vh 0;
+  }
   .container {
     grid-template-columns: 1fr;
-    gap: 4rem;
-    padding: 10rem 30px;
+    gap: 8vh;
+    padding: 0 40px;
+  }
+  .imageRevealZone {
+    order: -1; /* Image first on tablet/mobile */
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .textContent {
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+  }
+  .bodyText {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 30px;
+    gap: 6vh;
+  }
+  .lineText {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+  .pLead {
+    font-size: 1.2rem;
+  }
+  .pSub {
+    font-size: 0.9rem;
+  }
+  .rotatingLabel {
+    top: -20px;
+    right: -20px;
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 20px;
+  }
+  .lineText {
+    font-size: 2.2rem;
+  }
+  .pLead {
+    font-size: 1.1rem;
+  }
+  .textContent {
+    gap: 2rem;
   }
 }

@@ -21,7 +21,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 30vw;
+  font-size: 20vw; /* Reduced from 30vw */
   font-weight: 900;
   color: rgba(255, 255, 255, 0.015);
   white-space: nowrap;
@@ -185,13 +185,87 @@
 
 @media (max-width: 1024px) {
   .projectCard {
-    min-width: 90vw;
-    height: 70vh;
+    min-width: 80vw;
+    height: 60vh;
+    margin-right: 8vw;
   }
   .projectTitle {
-    font-size: 4rem;
+    font-size: clamp(2.2rem, 8vw, 4rem);
   }
   .viewMoreSlide {
-    min-width: 90vw;
+    min-width: 80vw;
+    height: 60vh;
+  }
+  .backgroundText {
+    font-size: 25vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .projectCard {
+    min-width: 85vw;
+    height: 55vh;
+    margin-right: 5vw;
+  }
+  .projectInfo {
+    bottom: 8%;
+    left: 8%;
+    right: 8%; /* Add right padding to prevent clipping */
+  }
+  .projectTitle {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .projectLocation {
+    font-size: 0.65rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.2rem;
+  }
+  .viewMoreSlide {
+    min-width: 85vw;
+    height: 55vh;
+  }
+  .viewMoreTitle {
+    font-size: 2.2rem;
+  }
+  .viewMoreCircle {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectCard {
+    min-width: 85vw;
+    height: 45vh;
+    margin-right: 5vw;
+  }
+  .projectInfo {
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+  }
+  .projectTitle {
+    font-size: 1.4rem; /* Reduced from 1.6rem */
+    line-height: 1.1;
+    width: 100%;
+    overflow-wrap: break-word;
+  }
+  .projectLocation {
+    font-size: 0.55rem;
+    letter-spacing: 0.1rem;
+  }
+  .projectNumber {
+    display: none; /* Hide numbers to avoid title overlap */
+  }
+  .viewMoreSlide {
+    min-width: 85vw;
+    height: 45vh;
+  }
+  .projectSection {
+    height: 450vh; 
+  }
+  .backgroundText {
+    display: none; 
   }
 }

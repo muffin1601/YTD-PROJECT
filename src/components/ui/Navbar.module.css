@@ -251,7 +251,71 @@
     grid-template-columns: 1fr;
     gap: 10vh;
   }
-  .menuVisual {
+}
+
+@media (max-width: 768px) {
+  .linkDesc {
     display: none;
+  }
+  .nav {
+    height: 80px;
+  }
+  .scrolled {
+    height: 70px;
+  }
+  .logoImg {
+    height: 50px;
+  }
+  .burgerLabel {
+    display: none;
+  }
+  .menuOverlay {
+    padding: 0 8vw;
+  }
+  .menuTopBar {
+    height: 80px;
+  }
+  .logoLarge {
+    height: 40px;
+  }
+  .closeLabel {
+    display: none;
+  }
+  .linkName {
+    font-size: 1.4rem;
+  }
+  .footerCol p, .socialLinks a {
+    font-size: 0.7rem;
+  }
+  .socialLinks {
+    gap: 1.5rem;
+  }
+  .bgTypography {
+    font-size: 40vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    height: 65px;
+  }
+  .menuOverlay {
+    padding: 0 6vw;
+  }
+  .footerCol {
+    gap: 0.8rem;
+  }
+  .menuFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3vh;
+    padding: 3vh 0;
+  }
+  .socialLinks {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .linkName {
+    font-size: 1.2rem;
   }
 }

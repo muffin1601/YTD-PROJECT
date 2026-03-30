@@ -72,18 +72,18 @@
 
 .line1 {
   display: block;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.5rem, 8vw, 6rem);
   letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 0.9;
 }
 
 .line2 {
   display: block;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.5rem, 8vw, 6rem);
   letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 0.9;
   color: var(--accent);
-  padding-left: 10vw;
+  padding-left: 8vw;
 }
 
 .ctaWrapper {
@@ -196,19 +196,81 @@
 
 @media (max-width: 1024px) {
   .container {
-    padding: 0 30px;
+    padding: 0 40px;
   }
   .ctaWrapper {
     position: relative;
     top: auto;
     right: auto;
-    margin-top: 50px;
-    align-self: flex-start;
+    margin-top: 5vh;
+    align-self: flex-end; /* Move to right instead of left for better balance */
+  }
+  .line1, .line2 {
+    font-size: clamp(3rem, 7vw, 5rem);
   }
   .line2 {
     padding-left: 0;
   }
   .scrollIndicator {
+    left: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 30px;
+  }
+  .line1, .line2 {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+  .ctaCircle {
+    width: 140px;
+    height: 140px;
+  }
+  .ctaText {
+    font-size: 0.65rem;
+    letter-spacing: 0.2rem;
+  }
+  .scrollIndicator {
+    bottom: 20px;
     left: 30px;
+    gap: 12px;
+  }
+  .scrollLine {
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 100vh; /* Keep full height but adjust content */
+  }
+  .container {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .line1, .line2 {
+    font-size: 1.8rem;
+    line-height: 1.1;
+  }
+  .line2 {
+    padding-left: 0;
+  }
+  .ctaWrapper {
+    margin-top: 4vh;
+    align-self: center; /* Center on very small screens */
+  }
+  .ctaCircle {
+    width: 110px;
+    height: 110px;
+  }
+  .ctaText {
+    font-size: 0.6rem;
+    letter-spacing: 0.15rem;
+  }
+  .scrollIndicator {
+    display: none;
   }
 }

@@ -34,7 +34,7 @@ export default function Contact() {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
               >
-                 <svg viewBox="0 0 100 100" width="350" height="350">
+                 <svg viewBox="0 0 100 100" className={styles.rotatingSvg}>
                     <path id="badgePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                     <text>
                        <textPath xlinkHref="#badgePath" className={styles.badgeText}>

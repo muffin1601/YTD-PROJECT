@@ -26,14 +26,34 @@
 }
 
 .footerLogoImg {
-  width: 400px; /* Large and prominent */
+  width: 100%;
+  max-width: 400px; /* Large on desktop */
   opacity: 0.8;
   transition: all 0.6s ease;
 }
 
-.footerLogoContainer:hover .footerLogoImg {
-  opacity: 1;
-  filter: brightness(1.2);
+@media (max-width: 1440px) {
+  .footerLogoImg {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footerLogoImg {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerLogoImg {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerLogoImg {
+    max-width: 120px;
+  }
 }
 
 .mainGrid {
@@ -150,9 +170,18 @@
 }
 
 @media (max-width: 1024px) {
+  .footer {
+    padding: 6vh 0;
+  }
+  .container {
+    padding: 0 40px;
+  }
+  .branding {
+    margin-bottom: 6vh;
+  }
   .mainGrid {
     grid-template-columns: 1fr;
-    gap: 10vh;
+    gap: 6vh;
   }
   .navCol {
     align-items: flex-start;
@@ -161,5 +190,43 @@
     flex-direction: column;
     gap: 4vh;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 30px;
+  }
+  .colTitle {
+    font-size: 0.65rem;
+    margin-bottom: 1rem;
+  }
+  .infoCol p, .footerLink {
+    font-size: 0.9rem;
+  }
+  .socialBar {
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 20px;
+  }
+  .bottomBar {
+    gap: 3vh;
+  }
+  .legal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+  }
+  .dot {
+    display: none;
+  }
+  .backToTop {
+    font-size: 0.7rem;
   }
 }

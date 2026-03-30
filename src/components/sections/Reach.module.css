@@ -146,8 +146,55 @@
 }
 
 @media (max-width: 1024px) {
+  .reachSection {
+    padding: 8rem 0;
+  }
+  .container {
+    padding: 0 40px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+  .header {
+    margin-bottom: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 30px;
+  }
   .grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .statNumber {
+    font-size: 4.5rem;
+  }
+  .statCard {
+    padding: 2rem;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .mapContainer {
+    height: 40vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 20px;
+  }
+  .statNumber {
+    font-size: 3.5rem;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+  .subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.4rem;
   }
 }
