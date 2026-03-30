@@ -1,154 +1,127 @@
-'use client';
+"use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useRef, FormEvent, useState } from 'react';
-import styles from './Contact.module.css';
-
-const services = [
-  "INTERIOR DESIGN",
-  "ARCHITECTURAL DESIGN",
-  "AUTHOR'S SUPERVISION",
-  "EQUIPMENT & RENOVATION",
-  "REALIZATION"
-];
+import { useScroll, useTransform, motion, useSpring } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import styles from "./Contact.module.css";
 
 export default function Contact() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [selectedService, setSelectedService] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-  };
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+
+  const smoothProgress = useSpring(scrollYProgress, { 
+    stiffness: 80, 
+    damping: 30,
+    restDelta: 0.001 
+  });
+
+
+  const rotateX = useTransform(smoothProgress, [0, 0.5, 1], [isMobile ? 15 : 30, 0, isMobile ? -15 : -30]);
+  const rotateY = useTransform(smoothProgress, [0, 0.5, 1], [isMobile ? -8 : -15, 0, isMobile ? 8 : 15]);
+  const scale = useTransform(smoothProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
+  const opacity = useTransform(smoothProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+ 
+  const bgX = useTransform(smoothProgress, [0, 1], ["0%", "-30%"]);
 
   return (
-    <section className={styles.section} id="contacts">
-      <div className={styles.container}>
-        
-        {/* Left Side: Rotating Signature Request Badge */}
-        <div className={styles.leftSide}>
-           <div className={styles.stickyBadge}>
-              <motion.div 
-                className={styles.rotatingCircle}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              >
-                 <svg viewBox="0 0 100 100" className={styles.rotatingSvg}>
-                    <path id="badgePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
-                    <text>
-                       <textPath xlinkHref="#badgePath" className={styles.badgeText}>
-                          • SEND REQUEST • SEND REQUEST • SEND REQUEST •
-                       </textPath>
-                    </text>
-                 </svg>
-              </motion.div>
-              <div className={styles.centerDot}></div>
-              <div className={styles.badgeLabel}>
-                 <span>YTD</span>
-                 <span>DESIGN</span>
-              </div>
-           </div>
-        </div>
-
-        {/* Right Side: High-End Minimalist Form */}
-        <div className={styles.rightSide}>
-           <div className={styles.header}>
-              <span className={styles.subtitle}>START A JOURNEY</span>
-              <h2 className={styles.title}>HAVE A PROJECT</h2>
-              <h2 className={`${styles.title} ${styles.accent}`}>IN MIND?</h2>
-           </div>
-
-           <form onSubmit={handleSubmit} className={styles.form}>
-              <div className={styles.inputGroup}>
-                 <span className={styles.inputNum}>01</span>
-                 <input type="text" placeholder="OBJECT LOCATION" className={styles.input} required />
-                 <div className={styles.line}></div>
-              </div>
-
-              {/* CUSTOM DESIGNED DROPDOWN */}
-              <div className={styles.inputGroup}>
-                 <span className={styles.inputNum}>02</span>
-                 <div 
-                   className={`${styles.customDropdown} ${isDropdownOpen ? styles.open : ''}`}
-                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                 >
-                    <div className={styles.dropdownTrigger}>
-                       <span className={selectedService ? styles.selectedVal : styles.placeholder}>
-                          {selectedService || "WHICH SERVICE IS OF INTEREST"}
-                       </span>
-                       <motion.span 
-                         animate={{ rotate: isDropdownOpen ? 180 : 0 }}
-                         className={styles.arrow}
-                       >
-                         ▼
-                       </motion.span>
-                    </div>
-                    
-                    <AnimatePresence>
-                      {isDropdownOpen && (
-                        <motion.ul 
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          className={styles.dropdownList}
-                        >
-                           {services.map((service) => (
-                             <li 
-                               key={service} 
-                               className={styles.dropdownItem}
-                               onClick={(e) => {
-                                 e.stopPropagation();
-                                 setSelectedService(service);
-                                 setIsDropdownOpen(false);
-                               }}
-                             >
-                               {service}
-                             </li>
-                           ))}
-                        </motion.ul>
-                      )}
-                    </AnimatePresence>
-                 </div>
-                 <div className={styles.line}></div>
-              </div>
-
-              <div className={styles.inputRow}>
-                 <div className={styles.inputGroup}>
-                    <span className={styles.inputNum}>03</span>
-                    <input type="text" placeholder="YOUR NAME" className={styles.input} required />
-                    <div className={styles.line}></div>
-                 </div>
-                 <div className={styles.inputGroup}>
-                    <span className={styles.inputNum}>04</span>
-                    <input type="email" placeholder="YOUR E-MAIL" className={styles.input} required />
-                    <div className={styles.line}></div>
-                 </div>
-              </div>
-
-              <div className={styles.submitSection}>
-                 <button type="submit" className={styles.submitBtn}>
-                    {isSubmitted ? 'SUBMITTED' : 'SEND'}
-                    <div className={styles.btnArrow}>
-                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                       </svg>
-                    </div>
-                 </button>
-              </div>
-           </form>
-
-           {isSubmitted && (
-             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.success}>
-                THANK YOU FOR YOUR REQUEST. WE WILL CONTACT YOU SOON.
-             </motion.div>
-           )}
-        </div>
+    <section ref={sectionRef} className={styles.root} id="contact">
+      <div className={styles.marqueeContainer}>
+        <motion.div style={{ x: bgX }} className={styles.marqueeTrack}>
+           {Array.from({length: 8}).map((_, i) => (
+             <span key={i} className={i % 2 === 0 ? styles.mFilled : styles.mOutline}>CONNECT_</span>
+           ))}
+        </motion.div>
       </div>
 
-      {/* <div className={styles.bgTypography}>
-         CONTACT US
-      </div> */}
+      <div className={styles.header}>
+        <span className={styles.label}>Get in Touch</span>
+        <h2 className={styles.headline}>Let's Build Something <br /><span className={styles.accentText}>Extraordinary</span></h2>
+      </div>
+
+      <div className={styles.container}>
+        <motion.div 
+          style={{ 
+            opacity, 
+            scale, 
+            rotateX: isMobile ? 0 : rotateX,
+            rotateY,
+            perspective: isMobile ? 600 : 1200 
+          }} 
+          className={styles.contactCard}
+        >
+          <div className={styles.cardGrid}>
+            
+            <div className={styles.infoCol}>
+              <div className={styles.reachBlock}>
+                <span className={styles.infoLabel}>General Inquiries</span>
+                <p className={styles.infoValue}>office@ytdarchitects.com</p>
+              </div>
+              
+              <div className={styles.reachBlock}>
+                <span className={styles.infoLabel}>Studio Location</span>
+                <p className={styles.infoValue}>Delhi, India</p>
+              </div>
+
+              <div className={styles.reachBlock}>
+                <span className={styles.infoLabel}>Direct Line</span>
+                <p className={styles.infoValue}>+91 9811111111</p>
+              </div>
+
+              <div className={styles.socials}>
+                 <span className={styles.socialLink}>INSTAGRAM</span>
+                 <span className={styles.socialLink}>LINKEDIN</span>
+                 <span className={styles.socialLink}>BEHANCE</span>
+              </div>
+            </div>
+
+            <div className={styles.formCol}>
+              <form className={styles.form}>
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>FULL NAME</label>
+                  <input type="text" className={styles.input} placeholder="John Doe" />
+                </div>
+                
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>EMAIL ADDRESS</label>
+                  <input type="email" className={styles.input} placeholder="john@example.com" />
+                </div>
+
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>PROJECT TYPE</label>
+                  <select className={styles.input}>
+                    <option>Commercial</option>
+                    <option>Residential</option>
+                    <option>Industrial</option>
+                  </select>
+                </div>
+
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>YOUR MESSAGE</label>
+                  <textarea className={styles.textarea} placeholder="Describe your vision..." rows={3}></textarea>
+                </div>
+
+                <button type="submit" className={styles.submitBtn}>
+                   <span>SEND INQUIRY</span>
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

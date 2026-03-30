@@ -1,271 +1,259 @@
 .projectSection {
   position: relative;
-  height: 800vh; /* Increased further to match the reference site track height */
   background: #111;
   z-index: 10;
+  width: 100%;
+  padding-bottom: 20vh;
 }
 
-.stickyContainer {
+.marqueeContainer {
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: 15vh;
   width: 100%;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  z-index: 5;
-}
-
-.backgroundText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20vw; /* Reduced from 30vw */
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.015);
-  white-space: nowrap;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
-.horizontalGrid {
+.marqueeTrack {
   display: flex;
-  height: 100%;
-  padding: 0 5vw;
-  align-items: center;
-  z-index: 2;
-  will-change: transform;
+  gap: 5vw;
+}
+
+.marqueeTrack span {
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5rem;
+}
+
+.mFilled {
+  color: rgba(255, 255, 254, 0.08); /* Sophisticated visibility */
+}
+
+.mOutline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05); /* Minimalist visibility */
+}
+
+.verticalList {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 30vh;
+  padding-top: 10vh;
+}
+
+.cardWrapper {
+  perspective: 1500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .projectCard {
-  min-width: 80vw;
-  height: 80vh;
-  margin-right: 15vw;
-  position: relative;
+  width: clamp(300px, 85vw, 1200px);
+  height: clamp(600px, 85vh, 850px);
+  background: #000;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.projectCard:hover {
-  transform: scale(1.02);
+.cardContent {
+  display: flex;
+  flex-direction: column; /* TEXT IS NO LONGER AN OVERLAY */
+  height: 100%;
+  width: 100%;
+}
+
+/* IMAGE IS COMPLETELY CLEAR AND LARGE */
+.imageBox {
+  width: 100%;
+  height: 60%; /* Majority of the card focus */
+  position: relative;
+  overflow: hidden;
 }
 
 .projectImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: brightness(0.7) contrast(1.1);
-  transition: filter 0.6s ease;
-}
-
-.projectCard:hover .projectImage {
+  object-fit: cover; /* PERFECT FIT - NO SPACES */
   filter: brightness(0.9) contrast(1.1);
+  position: relative;
 }
 
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+  background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 60%);
   z-index: 5;
 }
 
+/* TEXT CONTENT IS MOVED TO A SEPARATE BLOCK BELOW */
 .projectInfo {
-  position: absolute;
-  bottom: 10%;
-  left: 8%;
+  width: 100%;
+  height: 40%;
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
   z-index: 10;
-  color: #fff;
 }
 
 .projectLocation {
-  font-size: 0.8rem;
-  letter-spacing: 0.3rem;
-  color: var(--accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.4rem;
+  color: var(--accent, #e5cca8);
   text-transform: uppercase;
-  margin-bottom: 2rem;
-  display: block;
 }
 
 .projectTitle {
-  font-size: clamp(3rem, 10vw, 8rem);
-  line-height: 0.9;
+  font-size: clamp(1.4rem, 4vw, 3rem);
+  line-height: 1;
   text-transform: uppercase;
-  margin: 0 0 3rem 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .boldItalic {
   font-weight: 900;
   font-style: italic;
+  letter-spacing: -1px;
 }
 
 .thin {
-  font-weight: 100;
-  opacity: 0.7;
+  font-weight: 200;
+  letter-spacing: 4px;
+  font-size: 0.55em;
+  opacity: 0.6;
 }
 
 .moreLink {
-  font-size: 1rem;
-  letter-spacing: 0.2rem;
-  font-weight: 500;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 0.3rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
 }
 
-.underline {
+.moreLink:hover {
+  letter-spacing: 0.5rem;
+  opacity: 0.8;
+}
+
+.projectNum {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 1px;
-  background: var(--accent);
-  transition: width 0.4s ease;
+  top: 40px;
+  right: 40px;
+  font-size: 4rem;
+  font-weight: 900;
+  color: #fff;
+  opacity: 0.05;
+  pointer-events: none;
 }
 
-.projectCard:hover .underline {
-  width: 100%;
-}
-
-.projectNumber {
-  position: absolute;
-  top: 8%;
-  right: 8%;
-  font-size: 2rem;
-  font-weight: 100;
-  color: rgba(255, 255, 255, 0.2);
-  z-index: 10;
-}
-
-.viewMoreSlide {
-  min-width: 60vw;
-  height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #1a1a1a;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
-}
-
-.viewMoreContent {
+.exploreAll {
+  margin-top: 8vh; /* Reduced from 15vh */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2rem; /* Reduced */
 }
 
-.viewMoreTitle {
-  font-size: 4rem;
-  font-weight: 300;
+.exploreBtn {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
   color: #fff;
+  text-transform: uppercase;
 }
 
-.viewMoreCircle {
-  width: 100px;
-  height: 100px;
+.exploreCircle {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: var(--accent);
-  transition: all 0.4s ease;
+  justify-content: center;
+  color: #fff;
   cursor: pointer;
+  transition: all 0.4s ease;
 }
 
-.viewMoreCircle:hover {
+.exploreCircle svg {
+  width: 40px;
+  height: 40px;
+}
+
+.exploreCircle:hover {
   background: var(--accent);
   color: #000;
-  border-color: var(--accent);
-  transform: scale(1.1);
 }
 
 @media (max-width: 1024px) {
   .projectCard {
-    min-width: 80vw;
-    height: 60vh;
-    margin-right: 8vw;
+    height: 65vh;
   }
-  .projectTitle {
-    font-size: clamp(2.2rem, 8vw, 4rem);
-  }
-  .viewMoreSlide {
-    min-width: 80vw;
-    height: 60vh;
-  }
-  .backgroundText {
-    font-size: 25vw;
+  .projectInfo {
+    padding: 2.5rem;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+  .marqueeContainer {
+     top: 10vh;
+  }
+  .marqueeTrack span {
+     font-size: 2.5rem; /* Compact for mobile */
+     letter-spacing: 0.5rem; /* Reduced letter-spacing */
+  }
+  .mFilled {
+     color: rgba(255, 255, 255, 0.12); /* Slightly more readable */
+  }
+  .verticalList {
+    gap: 10vh;
+  }
   .projectCard {
-    min-width: 85vw;
-    height: 55vh;
-    margin-right: 5vw;
+    height: 60vh;
+    width: 95vw;
+  }
+  .imageBox {
+    height: 55%;
   }
   .projectInfo {
-    bottom: 8%;
-    left: 8%;
-    right: 8%; /* Add right padding to prevent clipping */
+    padding: 1.5rem;
+    gap: 1.2rem;
   }
-  .projectTitle {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+  .exploreAll {
+    margin-top: 4vh;
+    gap: 1.2rem;
   }
-  .projectLocation {
-    font-size: 0.65rem;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.2rem;
+  .exploreBtn {
+    font-size: 1.2rem; /* Refined compact size */
+    letter-spacing: 0.1rem;
+    padding: 0 10vw;
   }
-  .viewMoreSlide {
-    min-width: 85vw;
-    height: 55vh;
-  }
-  .viewMoreTitle {
-    font-size: 2.2rem;
-  }
-  .viewMoreCircle {
+  .exploreCircle {
     width: 70px;
     height: 70px;
   }
 }
 
-@media (max-width: 480px) {
-  .projectCard {
-    min-width: 85vw;
-    height: 45vh;
-    margin-right: 5vw;
-  }
-  .projectInfo {
-    bottom: 5%;
-    left: 5%;
-    right: 5%;
-  }
-  .projectTitle {
-    font-size: 1.4rem; /* Reduced from 1.6rem */
-    line-height: 1.1;
-    width: 100%;
-    overflow-wrap: break-word;
-  }
-  .projectLocation {
-    font-size: 0.55rem;
-    letter-spacing: 0.1rem;
-  }
-  .projectNumber {
-    display: none; /* Hide numbers to avoid title overlap */
-  }
-  .viewMoreSlide {
-    min-width: 85vw;
-    height: 45vh;
-  }
-  .projectSection {
-    height: 450vh; 
-  }
-  .backgroundText {
-    display: none; 
+/* For ultra-small screens like iPhone SE (360px - 320px) */
+@media (max-width: 360px) {
+  .marqueeTrack span {
+     font-size: 1.8rem;
+     letter-spacing: 0.3rem;
   }
 }

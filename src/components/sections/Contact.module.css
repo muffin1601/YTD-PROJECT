@@ -1,347 +1,322 @@
-.section {
+.root {
   position: relative;
-  min-height: 100vh;
-  background: #111;
-  padding: 15vh 0;
+  background: #111; /* User requested #111 */
+  color: #fff;
+  width: 100%;
+  padding-bottom: 10vh;
+}
+
+/* Atmospheric Background Marquee */
+.marqueeContainer {
+  position: sticky;
+  top: 25vh;
+  width: 100%;
   overflow: hidden;
-  z-index: 40;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 5vw;
+}
+
+.marqueeTrack span {
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5rem;
+}
+
+.mFilled {
+  color: rgba(255, 255, 255, 0.08);
+}
+
+.mOutline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+}
+
+.header {
+  padding: 10vh 8vw 5vh;
+  text-align: left;
+  z-index: 10;
+  position: relative;
+}
+
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.4rem;
+  text-transform: uppercase;
+  color: var(--accent, #a68e65);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.headline {
+  font-size: clamp(2.5rem, 5vw, 6rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.accentText {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
 }
 
 .container {
+  width: 100%;
+  padding: 0 6vw;
   position: relative;
   z-index: 10;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 6vw;
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 8vw;
-}
-
-.leftSide {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.stickyBadge {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.rotatingCircle {
-  position: absolute;
-  inset: 0;
-}
-
-.rotatingSvg {
+.contactCard {
   width: 100%;
-  height: 100%;
+  max-width: 1300px;
+  background: #000; /* Contrast against #111 */
+  border-radius: 4px;
+  padding: 5rem;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  will-change: transform, opacity; /* Fix for mobile lag */
 }
 
-.badgeText {
-  fill: var(--accent);
-  font-size: 8px;
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 8vw;
+  align-items: flex-start;
+}
+
+/* Info Column */
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.reachBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.infoLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.3rem;
   font-weight: 700;
-  letter-spacing: 5px;
+  color: var(--accent, #a68e65);
   text-transform: uppercase;
 }
 
-.centerDot {
-  width: 10px;
-  height: 10px;
+.infoValue {
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.technicalRef {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.coord {
+  font-size: 0.6rem;
+  letter-spacing: 0.15rem;
+  opacity: 0.3;
+}
+
+.miniDot {
+  width: 4px;
+  height: 4px;
   background: var(--accent);
   border-radius: 50%;
 }
 
-.badgeLabel {
-  position: absolute;
+.socials {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-.badgeLabel span:first-child {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: 1rem;
-}
-
-.badgeLabel span:last-child {
+.socialLink {
   font-size: 0.6rem;
-  color: var(--accent);
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.2rem;
+  font-weight: 700;
+  opacity: 0.4;
+  cursor: pointer;
 }
 
-.rightSide {
-  display: flex;
-  flex-direction: column;
-  gap: 8vh;
-}
-
-.subtitle {
-  font-size: 0.8rem;
-  letter-spacing: 0.5rem;
-  color: var(--accent);
-  text-transform: uppercase;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 2rem;
-}
-
-.title {
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 900;
-  color: #fff;
-  line-height: 1;
-  text-transform: uppercase;
-  font-style: italic;
-  margin: 0;
-}
-
-.accent {
-  font-weight: 100;
-  font-style: normal;
-  color: var(--accent);
-  margin-left: 10vw;
+/* Form Column */
+.formCol {
+  width: 100%;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 5vh;
+  gap: 2.5rem;
 }
 
 .inputGroup {
-  position: relative;
   display: flex;
   flex-direction: column;
-  flex: 1;
-}
-
-.inputNum {
-  font-size: 0.7rem;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-}
-
-.customDropdown {
-  position: relative;
+  gap: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 0.8rem;
   width: 100%;
-  cursor: pointer;
 }
 
-.dropdownTrigger {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 0;
-  color: #fff;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
+.inputLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.25rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.4);
 }
 
-.placeholder {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.selectedVal {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.arrow {
-  font-size: 0.6rem;
-  color: var(--accent);
-  transition: transform 0.4s ease;
-}
-
-.dropdownList {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  list-style: none;
-  padding: 1rem 0;
-  margin: 0;
-  z-index: 100;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-}
-
-.dropdownItem {
-  padding: 1rem 2rem;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.6);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-}
-
-.dropdownItem:hover {
-  background: var(--accent);
-  color: #000;
-  padding-left: 3rem;
-}
-
-.input, .select {
-  width: 100%;
+.input, .textarea {
   background: transparent;
   border: none;
-  padding: 1.5rem 0;
-  color: #fff;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
   outline: none;
-  font-family: inherit;
-}
-
-.line {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 300;
   width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  transition: all 0.4s ease;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-.input:focus ~ .line, .select:focus ~ .line {
-  background: var(--accent);
+select.input {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding-right: 20px;
 }
 
-.inputRow {
-  display: flex;
-  gap: 4vw;
+select.input option {
+  background: #000;
+  color: #fff;
 }
 
-.submitSection {
-  margin-top: 5vh;
+.textarea {
+  resize: none;
 }
 
 .submitBtn {
-  background: var(--accent);
-  border: none;
-  padding: 1.5rem 4rem;
-  font-size: 1rem;
-  font-weight: 900;
-  color: #000;
-  letter-spacing: 3px;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 1.2rem 2.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.3rem;
   cursor: pointer;
+  align-self: flex-start;
   transition: all 0.4s ease;
+  width: fit-content;
 }
 
 .submitBtn:hover {
-  background: #fff;
-  padding-right: 5rem;
-}
-
-.btnArrow {
-  width: 25px;
-}
-
-.success {
-  color: var(--accent);
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-.bgTypography {
-  position: absolute;
-  bottom: -2vh;
-  left: 0;
-  font-size: 10vw;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.015);
-  white-space: nowrap;
-  pointer-events: none;
+  background: var(--accent);
+  color: #000;
 }
 
 @media (max-width: 1024px) {
-  .section {
-    padding: 10vh 0;
+  .header {
+     padding: 8vh 8vw 4vh;
   }
-  .container {
+  .contactCard {
+    padding: 3.5rem;
+  }
+  .cardGrid {
     grid-template-columns: 1fr;
     gap: 8vh;
-    padding: 0 40px;
   }
-  .leftSide {
-    order: 2;
-  }
-  .rightSide {
-    order: 1;
-    gap: 5vh;
-  }
-  .inputRow {
-    flex-direction: column;
-    gap: 5vh;
-  }
-  .stickyBadge {
-    width: 300px;
-    height: 300px;
-  }
-  .accent {
-    margin-left: 0;
-    display: block;
-    margin-top: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 30px;
-  }
-  .title {
-    font-size: 2.5rem;
-  }
-  .subtitle {
-    font-size: 0.7rem;
-    letter-spacing: 0.3rem;
-  }
-  .stickyBadge {
-    width: 140px; /* Kept small as requested by user */
-    height: 140px;
-  }
-  .badgeLabel span:first-child {
-    font-size: 0.9rem;
-    letter-spacing: 0.4rem;
-  }
-  .badgeLabel span:last-child {
-    font-size: 0.4rem;
-    letter-spacing: 0.15rem;
+  .infoCol {
+     gap: 3rem;
   }
   .submitBtn {
-    padding: 1.2rem 3rem;
-    font-size: 0.9rem;
+     width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 0 20px;
+  .header {
+     padding: 4vh 4vw 2vh;
   }
-  .title {
-    font-size: 2rem;
+  .headline {
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
   }
-  .inputGroup p {
-    font-size: 0.9rem;
+  .contactCard {
+    padding: 1.5rem 1.2rem;
+    width: 94vw; /* Balanced width */
   }
-  .dropdownTrigger {
-    font-size: 0.8rem;
+  .cardGrid {
+     gap: 3vh;
+  }
+  .infoCol {
+     align-items: center;
+     text-align: center;
+     gap: 1.5rem;
+  }
+  .socials {
+     justify-content: center;
+     gap: 1.2rem; /* Reduced to prevent overflow */
+  }
+  .socialLink {
+     font-size: 0.55rem;
+  }
+  .reachBlock {
+     gap: 0.3rem;
+  }
+  .infoValue {
+    font-size: 0.95rem; /* Compact for emails */
+    word-break: break-all;
+  }
+  .form {
+     gap: 1.2rem;
+  }
+  .inputGroup {
+     gap: 0.5rem;
+     padding-bottom: 0.5rem;
+  }
+  .input {
+    font-size: 0.85rem;
   }
   .submitBtn {
-    width: 100%;
-    justify-content: space-between;
+     width: 100%;
+     padding: 1rem;
+     font-size: 0.7rem;
+     letter-spacing: 0.2rem;
+  }
+  .marqueeContainer {
+     display: none;
+  }
+}
+
+/* For ultra-small screens like iPhone SE (360px - 320px) */
+@media (max-width: 360px) {
+  .contactCard {
+     padding: 1.25rem 0.8rem;
+  }
+  .socials {
+     gap: 0.8rem;
+  }
+  .headline {
+     font-size: 1.15rem;
+  }
+  .infoValue {
+     font-size: 0.85rem;
   }
 }

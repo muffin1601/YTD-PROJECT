@@ -1,309 +1,269 @@
-.reviewsSection {
+.root {
   position: relative;
   background: #111;
-  z-index: 30;
+  color: #fff;
+  width: 100%;
+  padding-bottom: 20vh;
 }
 
-.desktopOnly {
-  display: block;
-  height: 400vh;
-}
-
-.mobileOnly {
-  display: none;
-}
-
-.stickyContainer {
+/* Atmospheric Background Marquee */
+.marqueeContainer {
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: 25vh;
   width: 100%;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 5;
-}
-
-.bgText {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  font-size: 10vw;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.015);
-  white-space: nowrap;
   pointer-events: none;
   z-index: 1;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 5vw;
+}
+
+.marqueeTrack span {
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5rem;
+}
+
+.mFilled {
+  color: rgba(255, 255, 255, 0.08); /* Sophisticated subtle fill */
+}
+
+.mOutline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05); /* Minimalist outline */
 }
 
 .header {
-  position: absolute;
-  top: 10vh;
-  left: 6vw;
-  z-index: 50;
-  pointer-events: none;
+  padding: 10vh 8vw 5vh;
+  text-align: left;
+  z-index: 10;
+  position: relative;
 }
 
-.subtitle {
-  font-size: 0.8rem;
-  letter-spacing: 0.5rem;
-  color: var(--accent);
+.premiumLabel {
+  font-size: 0.75rem;
+  letter-spacing: 0.4rem;
   text-transform: uppercase;
-  font-weight: 600;
+  color: var(--accent, #a68e65);
   display: block;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
-.title {
-  font-size: clamp(3rem, 10vw, 7rem);
+.headline {
+  font-size: clamp(2.5rem, 5vw, 6rem);
   font-weight: 900;
-  color: #fff;
   line-height: 1;
   text-transform: uppercase;
-  font-style: italic;
+  letter-spacing: -2px;
   margin: 0;
 }
 
-.accent {
-  font-weight: 100;
-  font-style: normal;
-  color: var(--accent);
-  margin-left: 10vw;
-}
-
-.slidesWrapper {
+/* ------- SLIDE LIST ------- */
+.verticalList {
+  display: flex;
+  flex-direction: column;
+  gap: 15vh;
   position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.maskSlide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #111;
   z-index: 10;
 }
 
-.bgImg {
-  position: absolute;
-  inset: 0;
+.stepWrapper {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.4) saturate(0.5);
-  z-index: 1;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.overlay {
+.processCard {
+  width: clamp(300px, 85vw, 1300px);
+  height: 100%;
+  position: relative;
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  gap: 6vw;
+  width: 100%;
+  height: 100%;
+}
+
+/* Image Section */
+.imageBox {
+  flex: 1.2;
+  position: relative;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+  background: #000;
+}
+
+.mainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* PERFECT FIT - NO SPACES */
+  filter: brightness(0.9) contrast(1.1);
+  background: #000;
+  position: relative;
+}
+
+.imageOverlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%);
   z-index: 5;
 }
 
-.textContainer {
-  position: relative;
-  z-index: 20;
-  max-width: 1200px;
-  padding: 0 5vw;
-  text-align: left;
-}
-
-.quoteMark {
-  font-size: 15vw;
-  font-family: serif;
-  color: var(--accent);
-  opacity: 0.3;
-  line-height: 1;
-  margin-bottom: -5vw;
-  margin-left: -2vw;
-}
-
-.reviewText {
-  font-size: clamp(2rem, 2.5vw, 2.5rem);
+.stepNum {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  font-size: 8rem;
   font-weight: 900;
   color: #fff;
+  z-index: 10;
+  opacity: 0.05;
+  font-style: italic;
+  pointer-events: none;
+}
+
+/* Info Section */
+.infoBox {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-right: 4vw;
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.5rem;
+  font-weight: 700;
+  color: var(--accent, #a68e65);
   text-transform: uppercase;
-  line-height: 0.95;
-  letter-spacing: -2px;
+}
+
+.quoteWrap {
+  position: relative;
+}
+
+.quoteChar {
+  font-size: 8rem;
+  font-family: serif;
+  color: var(--accent);
+  position: absolute;
+  top: -4rem;
+  left: -3rem;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.desc {
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  line-height: 1.35;
+  color: #fff;
+  max-width: 600px;
+  margin: 0;
+  font-weight: 500;
 }
 
 .authorBadge {
-  margin-top: 4rem;
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.badgeLine {
-  width: 100px;
+.line {
+  width: 60px;
   height: 1px;
   background: var(--accent);
 }
 
-.authorName {
-  font-size: 1.2rem;
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.name {
+  font-size: 0.85rem;
   letter-spacing: 0.4rem;
-  font-weight: 900;
-  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.location {
+  font-size: 0.65rem;
+  opacity: 0.4;
+  letter-spacing: 0.2rem;
   text-transform: uppercase;
 }
 
 @media (max-width: 1024px) {
-  .desktopOnly {
-    display: none;
+  .root {
+     padding-bottom: 10vh;
   }
-  .mobileOnly {
-    display: block;
-    padding: 10vh 0;
-    background: #000;
-  }
-  
-  .mobileHeader {
-    padding: 0 40px;
-    margin-bottom: 6vh;
-  }
-  
-  .mobileSubtitle {
-    font-size: 0.75rem;
-    letter-spacing: 0.5rem;
-    color: var(--accent);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 1.5rem;
-  }
-  
-  .mobileTitle {
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-  }
-  
-  .mobileList {
-    display: flex;
-    flex-direction: column;
-    gap: 12vh;
-    padding: 0 40px;
-  }
-  
-  .mobileCard {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .cardImageWrap {
-    position: relative;
-    width: 100%;
-    height: 45vh;
-    overflow: hidden;
-    border-radius: 4px;
-    margin-bottom: 3vh;
-  }
-  
-  .mobileCardImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .cardOverlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8));
-  }
-  
-  .cardIndex {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 2rem;
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.2);
-    font-style: italic;
-  }
-  
   .cardContent {
-    position: relative;
+    flex-direction: column;
+    gap: 4vh;
+    justify-content: center;
   }
-  
-  .mobileQuote {
-    font-size: 8rem;
-    font-family: serif;
-    color: var(--accent);
-    opacity: 0.2;
-    line-height: 1;
-    position: absolute;
-    top: -40px;
-    left: -10px;
-    z-index: 0;
+  .imageBox {
+    flex: none;
+    width: 100%;
+    height: 48vh;
   }
-  
-  .mobileReviewText {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #fff;
-    text-transform: uppercase;
-    line-height: 1.1;
-    margin-bottom: 4vh;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .mobileAuthor {
-    display: flex;
+  .infoBox {
+    flex: none;
+    width: 100%;
     align-items: center;
-    gap: 1.5rem;
+    text-align: center;
+    padding-right: 0;
   }
-  
-  .mobileLine {
-    width: 40px;
-    height: 1px;
-    background: var(--accent);
+  .desc {
+    font-size: 1.5rem;
   }
-  
-  .mobileAuthorName {
-    font-size: 1rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
+  .quoteChar {
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
-  
-  .mobileLocation {
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    display: block;
-    margin-top: 0.2rem;
+  .authorBadge {
+    align-items: center;
   }
 }
 
 @media (max-width: 480px) {
-  .mobileHeader, .mobileList {
-    padding: 0 25px;
+  .marqueeContainer {
+     top: 10vh;
   }
-  .mobileTitle {
-    font-size: 1.8rem;
+  .headline {
+     font-size: 1.8rem;
   }
-  .mobileReviewText {
-    font-size: 1.35rem;
+  .imageBox {
+    height: 32vh;
   }
-  .cardImageWrap {
-    height: 35vh;
+  .desc {
+    font-size: 1.1rem;
+    max-width: 100%;
+  }
+  .name {
+    font-size: 0.75rem;
+  }
+  .stepNum {
+    font-size: 4rem;
+  }
+  .stepWrapper {
+     padding: 0 4vw;
+     height: auto;
+     margin-bottom: 8vh;
   }
 }

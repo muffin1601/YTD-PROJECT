@@ -5,102 +5,118 @@ import { useRef } from 'react';
 import styles from './About.module.css';
 
 export default function About() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  return (
+    <section className={styles.root} id="about">
+      
+      {/* Background Fixed Marquee */}
+      <div className={styles.marqueeContainer}>
+        <motion.div 
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          className={styles.marqueeTrack}
+        >
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i} className={i % 2 === 0 ? styles.mOutline : styles.mFilled}>
+              PHILOSOPHY
+            </span>
+          ))}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i + 8} className={i % 2 === 0 ? styles.mOutline : styles.mFilled}>
+              PHILOSOPHY
+            </span>
+          ))}
+        </motion.div>
+      </div>
+
+      <div className={styles.header}>
+        <span className={styles.premiumLabel}>Essence</span>
+        <h2 className={styles.headline}>Our Studio Philosophy</h2>
+      </div>
+
+      <div className={styles.verticalList}>
+        <AboutSectionCard 
+          title="CRAFTING THE SYNERGY"
+          subtitle="ARCHITECTURAL PURITY"
+          desc="At YTD Architects, we don’t just build structures; we curate emotional landscapes that harmonize the human spirit with the environment."
+          image="/2J3A7880-HDR.jpg"
+          index={0}
+        />
+        <AboutSectionCard 
+          title="TIMLESS DIALOGUE"
+          subtitle="FORM & MATERIAL"
+          desc="Our practice is dedicated to the pursuit of architectural purity and the creation of spaces that redefine light, form, and material."
+          image="/2J3A7836-HDR.jpg"
+          index={1}
+        />
+      </div>
+    </section>
+  );
+}
+
+function AboutSectionCard({ title, subtitle, desc, image, index }: { 
+  title: string, 
+  subtitle: string, 
+  desc: string, 
+  image: string,
+  index: number 
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"]
+    target: cardRef,
+    offset: ["start end", "end start"]
   });
 
   const springProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
-  // Floating background elements
-  const bgY = useTransform(springProgress, [0, 1], ["0%", "-20%"]);
-  const bgScale = useTransform(springProgress, [0, 1], [1, 1.2]);
+  // 3D Tilt Logic matching site-wide architectural signature
+  const rotateX = useTransform(springProgress, [0, 0.5, 1], [30, 0, -30]);
+  const rotateY = useTransform(springProgress, [0, 0.5, 1], index % 2 === 0 ? [-15, 0, 15] : [15, 0, -15]);
+  const scale = useTransform(springProgress, [0, 0.5, 1], [0.85, 1, 0.85]);
+  const opacity = useTransform(springProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
   
-  // Staggered text movement
-  const textX1 = useTransform(springProgress, [0, 0.5], ["0%", "-10%"]);
-  const textX2 = useTransform(springProgress, [0.2, 0.7], ["0%", "15%"]);
-  const textX3 = useTransform(springProgress, [0.4, 0.9], ["0%", "-5%"]);
-
-  // Image reveal circle
-  const imageClip = useTransform(springProgress, [0, 1], [" circle(20% at 50% 50%)", "circle(100% at 50% 50%)"]);
-  const imageY = useTransform(springProgress, [0, 1], ["10%", "-10%"]);
+  // Parallax for sub-elements
+  const textY = useTransform(springProgress, [0, 1], [50, -50]);
+  const imgY = useTransform(springProgress, [0, 1], ["-12%", "12%"]);
 
   return (
-    <section ref={sectionRef} className={styles.aboutSection}>
-      <div className={styles.stickyContainer}>
-        {/* Parallax Background Text */}
-        <motion.div 
-          style={{ y: bgY, scale: bgScale }} 
-          className={styles.bgText}
-        >
-          PHILOSOPHY OUR PHILOSOPHY PHILOSOPHY
-        </motion.div>
-        
-        <div className={styles.container}>
-          <div className={styles.textContent}>
-            <div className={styles.headLineWrapper}>
-              <motion.div style={{ x: textX1 }} className={styles.line}>
-                <h2 className={styles.lineText}>CRAFTING</h2>
-              </motion.div>
-              <motion.div style={{ x: textX2 }} className={styles.line}>
-                <h2 className={styles.lineText}>THE</h2>
-              </motion.div>
-              <motion.div style={{ x: textX3 }} className={styles.line}>
-                <h2 className={`${styles.lineText} ${styles.lineTextThin}`}>UNEXPECTED</h2>
-              </motion.div>
-              <motion.div style={{ x: textX1 }} className={styles.line}>
-                <h2 className={styles.lineText}>SYNERGY</h2>
-              </motion.div>
-            </div>
-
-            <div className={styles.bodyText}>
-              <motion.p 
-                className={styles.pLead}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.2 }}
-              >
-                At YTD Architects, we don’t just build structures; we curate emotional landscapes that harmonize the human spirit with the environment.
-              </motion.p>
-              <motion.p className={styles.pSub}>
-                Our practice is dedicated to the pursuit of architectural purity and the creation of timeless spaces that redefine the dialogue between light, form, and material.
-              </motion.p>
-            </div>
+    <div ref={cardRef} className={styles.stepWrapper}>
+      <motion.div 
+        style={{ 
+          opacity, 
+          scale,
+          rotateX,
+          rotateY,
+          perspective: 1200
+        }} 
+        className={styles.processCard}
+      >
+        <div className={styles.cardContent} style={{ flexDirection: index % 2 !== 0 ? 'row-reverse' : 'row' }}>
+          
+          <div className={styles.imageBox}>
+             <motion.img 
+               src={image} 
+               alt={title} 
+               className={styles.mainImg}
+               style={{ y: imgY }}
+             />
+             <div className={styles.imageOverlay}></div>
+             <span className={styles.stepNum}>0{index + 1}</span>
           </div>
 
-          <div className={styles.imageRevealZone}>
-            <motion.div 
-              className={styles.imageMask}
-              style={{ clipPath: imageClip }}
-            >
-              <motion.img 
-                src="/2J3A7880-HDR.jpg" 
-                alt="Portrait" 
-                className={styles.aboutImg}
-                style={{ y: imageY }}
-              />
-            </motion.div>
-            
-            <motion.div 
-              className={styles.rotatingLabel}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            >
-              <svg viewBox="0 0 100 100" width="150" height="150">
-                <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
-                <text>
-                  <textPath xlinkHref="#circlePath" className={styles.svgText}>
-                    • YTD ARCHITECTS • DESIGN STUDIO •
-                  </textPath>
-                </text>
-              </svg>
-            </motion.div>
-          </div>
+          <motion.div style={{ y: textY }} className={styles.infoBox} style={{ textAlign: index % 2 !== 0 ? 'right' : 'left', alignItems: index % 2 !== 0 ? 'flex-end' : 'flex-start' }}>
+             <span className={styles.subtitle}>{subtitle}</span>
+             <h3 className={styles.title}>{title}</h3>
+             <p className={styles.desc}>{desc}</p>
+             
+             <div className={styles.technicalDetail} style={{ justifyContent: index % 2 !== 0 ? 'flex-end' : 'flex-start' }}>
+                <div className={styles.dot}></div>
+                <div className={styles.line}></div>
+             </div>
+          </motion.div>
+
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </div>
   );
 }

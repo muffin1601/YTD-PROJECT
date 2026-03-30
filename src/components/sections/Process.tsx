@@ -2,187 +2,141 @@
 
 import { useScroll, useTransform, motion, useSpring } from "framer-motion";
 import { useRef } from "react";
-import Image from "next/image";
 import styles from "./Process.module.css";
 
 const processSteps = [
   {
     id: "01",
     title: "CONCEPT",
+    subtitle: "CONCEPT & VISION",
     desc: "Every masterpiece begins with a deep exploration of space, context, and the client's unique aspirations.",
     image: "/2J3A7901 copy.jpg",
-    thumb: "/SOFA WALL.jpg (2).jpeg",
-    thumbPos: "bottomRight" as const,
   },
   {
     id: "02",
     title: "DESIGN",
+    subtitle: "DESIGN & DEVELOPMENT",
     desc: "We translate abstract ideas into precise architectural diagrams and functional layouts that define the soul of the project.",
     image: "/SOFA WALL.jpg (2).jpeg",
-    thumb: "/Picture10.jpg",
-    thumbPos: "topLeft" as const,
   },
   {
     id: "03",
     title: "CRAFTING",
+    subtitle: "DIGITAL VISUALIZATION",
     desc: "Experience the future through hyper-realistic digital twin visualizations for each interior and structural element.",
     image: "/Picture10.jpg",
-    thumb: "/Picture8.jpg",
-    thumbPos: "bottomRight" as const,
   },
   {
     id: "04",
     title: "DELIVERY",
+    subtitle: "PORTFOLIO DELIVERY",
     desc: "A comprehensive architectural portfolio containing technical blueprints and final visualizations is finalized for execution.",
     image: "/Picture8.jpg",
-    thumb: "/2J3A7901 copy.jpg",
-    thumbPos: "topLeft" as const,
   },
 ];
 
-const N = processSteps.length;
-
 export default function Process() {
-  const rootRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: rootRef,
-    offset: ["start start", "end end"],
-  });
-
-  const smooth = useSpring(scrollYProgress, { stiffness: 80, damping: 25 });
-
-  const titleY = useTransform(smooth, [0, 0.18], ["0%", "-120%"]);
-  const titleOpacity = useTransform(smooth, [0, 0.12], [1, 0]);
-
   return (
-    <section ref={rootRef} className={styles.root} id="process">
-      <div className={styles.sticky}>
-        
-        <motion.div
-          className={styles.headlineWrap}
-          style={{ y: titleY, opacity: titleOpacity }}
+    <section className={styles.root} id="process">
+      {/* Immersive Background Marquee */}
+      <div className={styles.marqueeContainer}>
+        <motion.div 
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+          className={styles.marqueeTrack}
         >
-          <span className={styles.premiumLabel}>Methodology</span>
-          <h2 className={styles.headline}>The Creative Process</h2>
-        </motion.div>
-
-        {/* ── Slides ── */}
-        <div className={styles.slidesWrap}>
-          {processSteps.map((step, i) => (
-            <Slide key={step.id} step={step} index={i} total={N} smooth={smooth} />
+          {Array.from({ length: 10 }).map((_, i) => (
+            <span key={i} className={i % 2 === 0 ? styles.mFilled : styles.mOutline}>
+              PROCESS
+            </span>
           ))}
-        </div>
+          {/* Duplicate for seamless loop */}
+          {Array.from({ length: 10 }).map((_, i) => (
+            <span key={i + 10} className={i % 2 === 0 ? styles.mFilled : styles.mOutline}>
+              PROCESS
+            </span>
+          ))}
+        </motion.div>
+      </div>
+
+      <div className={styles.header}>
+        <span className={styles.premiumLabel}>Methodology</span>
+        <h2 className={styles.headline}>The Creative Process</h2>
+      </div>
+
+      <div className={styles.verticalList}>
+        {processSteps.map((step, i) => (
+          <ProcessStep 
+            key={step.id} 
+            step={step} 
+            index={i} 
+          />
+        ))}
       </div>
     </section>
   );
 }
 
-function Slide({
-  step,
-  index,
-  total,
-  smooth,
-}: {
-  step: (typeof processSteps)[0];
-  index: number;
-  total: number;
-  smooth: any;
+function ProcessStep({ step, index }: { 
+  step: typeof processSteps[0], 
+  index: number 
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
 
-  const TITLE_EXIT = 0.15;
-  const range = (1 - TITLE_EXIT) / total;
-  const start = TITLE_EXIT + index * range;
-  const end = start + range;
+  const springProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
-  const fadeIn = Math.max(0, start - 0.05);
-  const opacity = useTransform(
-    smooth,
-    [fadeIn, start + 0.05, end - 0.06, end],
-    [index === 0 ? 1 : 0, 1, 1, 0]
-  );
-
-  const imageScale = useTransform(smooth, [start, end], [1.0, 1.1]);
-
-  const contentY = useTransform(
-    smooth,
-    [start, start + 0.06, end - 0.06, end],
-    [40, 0, 0, -30]
-  );
-  const contentOpacity = useTransform(
-    smooth,
-    [start, start + 0.06, end - 0.06, end],
-    [0, 1, 1, 0]
-  );
-
-  const thumbOpacity = useTransform(
-    smooth,
-    [start + 0.02, start + 0.08, end - 0.08, end - 0.02],
-    [0, 1, 1, 0]
-  );
-  const thumbScale = useTransform(smooth, [start, end], [0.9, 1.05]);
-
-  // Diagonal Motion for thumbnails
-  const isTopLeft = step.thumbPos === "topLeft";
-  const thumbX = useTransform(
-    smooth, 
-    [start, end], 
-    [isTopLeft ? -60 : 60, isTopLeft ? 40 : -40]
-  );
-  const thumbY = useTransform(
-    smooth, 
-    [start, end], 
-    [isTopLeft ? -60 : 60, isTopLeft ? 40 : -40]
-  );
-
-  const thumbClass = isTopLeft ? styles.thumbTopLeft : styles.thumbBottomRight;
+  // Increased 3D Tilt and Extreme Perspective
+  const rotateX = useTransform(springProgress, [0, 0.5, 1], [45, 0, -45]);
+  const rotateY = useTransform(springProgress, [0, 0.5, 1], [-20, 0, 20]);
+  const scale = useTransform(springProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const opacity = useTransform(springProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+  
+  // High-end parallax offsets
+  const imgY = useTransform(springProgress, [0, 1], ["-15%", "15%"]);
+  const textY = useTransform(springProgress, [0, 1], [50, -50]);
 
   return (
-    <motion.div className={styles.slide} style={{ opacity }}>
-      {/* ── Main image ── */}
-      <motion.div
-        className={styles.mainImageWrap}
-        style={{ scale: imageScale }}
-      >
-        <Image
-          src={step.image}
-          alt={step.title}
-          fill
-          className={styles.mainImage}
-          priority={index === 0}
-          sizes="(max-width: 768px) 90vw, 48vw"
-        />
-      </motion.div>
-
-      {/* ── Thumbnail (corner) ── */}
-      <motion.div
-        className={`${styles.thumbWrap} ${thumbClass}`}
+    <div ref={cardRef} className={styles.stepWrapper}>
+      <motion.div 
         style={{ 
-          opacity: thumbOpacity, 
-          scale: thumbScale,
-          x: thumbX,
-          y: thumbY,
-        }}
+          opacity, 
+          scale,
+          rotateX,
+          rotateY,
+          perspective: 800 /* More extreme 3D depth */
+        }} 
+        className={styles.processCard}
       >
-        <Image
-          src={step.thumb}
-          alt=""
-          fill
-          className={styles.thumbImage}
-          sizes="220px"
-        />
-      </motion.div>
+        <div className={styles.cardContent}>
+          
+          <div className={styles.imageBox}>
+             <motion.img 
+               src={step.image} 
+               alt={step.title} 
+               className={styles.mainImg}
+               style={{ y: imgY }}
+             />
+             <div className={styles.imageOverlay}></div>
+             <span className={styles.stepNum}>0{index + 1}</span>
+          </div>
 
-      {/* ── Right text content ── */}
-      <motion.div
-        className={styles.content}
-        style={{ opacity: contentOpacity, y: contentY }}
-      >
-        <span className={styles.slideNum}>{step.id}</span>
-        <h3 className={styles.cardTitle}>{step.title}</h3>
-        <p className={styles.slideText}>{step.desc}</p>
-        {/* <button className={styles.slideLink}>Learn More About {step.title}</button> */}
+          <motion.div style={{ y: textY }} className={styles.infoBox}>
+             <span className={styles.subtitle}>{step.subtitle}</span>
+             <h3 className={styles.title}>{step.title}</h3>
+             <p className={styles.desc}>{step.desc}</p>
+             <div className={styles.technicalDetail}>
+                <div className={styles.dot}></div>
+                <div className={styles.line}></div>
+             </div>
+          </motion.div>
+
+        </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
