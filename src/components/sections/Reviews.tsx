@@ -45,7 +45,6 @@ export default function Reviews() {
               REVIEWS
             </span>
           ))}
-          {/* Duplicate for loop */}
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i + 8} className={i % 2 === 0 ? styles.mFilled : styles.mOutline}>
               REVIEWS
@@ -78,15 +77,15 @@ function ReviewCard({ review, index }: { review: typeof reviews[0], index: numbe
 
   const springProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
-  // 3D Tilt Logic
+
   const rotateX = useTransform(springProgress, [0, 0.5, 1], [30, 0, -30]);
   const rotateY = useTransform(springProgress, [0, 0.5, 1], [-15, 0, 15]);
   const scale = useTransform(springProgress, [0, 0.5, 1], [0.85, 1, 0.85]);
   const opacity = useTransform(springProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
   
-  // Parallax for image inside card
+
   const imgY = useTransform(springProgress, [0, 1], ["-12%", "12%"]);
-  // Separate parallax for text
+
   const textY = useTransform(springProgress, [0, 1], [60, -60]);
 
   return (
@@ -103,7 +102,6 @@ function ReviewCard({ review, index }: { review: typeof reviews[0], index: numbe
       >
         <div className={styles.cardContent}>
           
-          {/* IMAGE SECTION - COMPLETELY CLEAR */}
           <div className={styles.imageBox}>
              <motion.img 
                src={review.image} 
@@ -114,7 +112,6 @@ function ReviewCard({ review, index }: { review: typeof reviews[0], index: numbe
              <div className={styles.imageOverlay}></div>
           </div>
 
-          {/* TEXT SECTION - MOVED OUTSIDE OVERLAY */}
           <motion.div style={{ y: textY }} className={styles.infoBox}>
              <div className={styles.topInfo}>
                 <span className={styles.subtitle}>{review.subtitle}</span>

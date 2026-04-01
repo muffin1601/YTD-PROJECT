@@ -15,7 +15,7 @@
 }
 
 .cursorText {
-  font-size: 4px; /* Scaled up by cursor scale */
+  font-size: 4px; 
   color: #fff;
   text-transform: uppercase;
   font-weight: 700;

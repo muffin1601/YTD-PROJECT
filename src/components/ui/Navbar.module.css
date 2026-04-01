@@ -311,7 +311,7 @@
     gap: 5vh;
   }
   .menuVisual {
-    display: none; /* Hide logo image in content area to save space */
+    display: none;
   }
   .linksGrid {
     width: 100%;
@@ -325,7 +325,7 @@
     justify-content: center;
   }
   .linkArrow {
-    display: none; /* Keep it clean and centered */
+    display: none;
   }
   .footerCol {
     gap: 0.8rem;

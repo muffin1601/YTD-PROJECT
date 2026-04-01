@@ -20,7 +20,6 @@ export default function Footer() {
     <footer ref={footerRef} className={styles.footer}>
       <div className={styles.container}>
         
-        {/* Massive Signature Reveal */}
         {/* <div className={styles.signatureWrap}>
            <motion.h1 style={{ x: xPos, opacity: signatureOpacity }} className={styles.massiveSignature}>
               YTD ARCHITECTS

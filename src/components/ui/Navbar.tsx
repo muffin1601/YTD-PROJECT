@@ -33,7 +33,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* GLOBAL NAVBAR (Always on top) */}
       <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''} ${isOpen ? styles.hidden : ''}`}>
         <div className={styles.container}>
           <div className={styles.left}>
@@ -61,7 +60,6 @@ export default function Navbar() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className={styles.menuOverlay}
           >
-             {/* TOP BAR INSIDE MENU */}
              <div className={styles.menuTopBar}>
                 <Link href="/" onClick={() => setIsOpen(false)}>
                    <img src="/logo.png" alt="YTD" className={styles.logoLarge} />

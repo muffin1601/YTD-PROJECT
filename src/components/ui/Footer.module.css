@@ -3,7 +3,7 @@
   background: #111;
   color: #fff;
   width: 100%;
-  padding-top: 8vh; /* Reduced from 15vh */
+  padding-top: 8vh; 
   padding-bottom: 5vh;
   overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -18,10 +18,10 @@
   z-index: 10;
 }
 
-/* Massive Signature Reveal */
+
 .signatureWrap {
   width: 100%;
-  padding-bottom: 4vh; /* Reduced from 10vh */
+  padding-bottom: 4vh;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -29,16 +29,15 @@
 .massiveSignature {
   font-size: 15vw;
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.02); /* Extremely subtle signature */
+  color: rgba(255, 255, 255, 0.02); 
   white-space: nowrap;
   letter-spacing: 2rem;
   line-height: 1;
   text-transform: uppercase;
 }
 
-/* Footer Content Grid */
 .mainContent {
-  padding: 6vh 0; /* Reduced from 10vh */
+  padding: 6vh 0; 
 }
 
 .footerGrid {
@@ -46,14 +45,14 @@
   grid-template-columns: 1.5fr 1fr 1fr;
   gap: 6vw;
   align-items: flex-start;
-  justify-items: center; /* Center columns in the grid */
+  justify-items: center; 
 }
 
 .col {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  align-items: center; /* Center content within columns */
+  align-items: center; 
   text-align: center;
 }
 
@@ -91,7 +90,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: center; /* Center navigation links */
+  align-items: center;
 }
 
 .colNav a {
@@ -108,7 +107,6 @@
   color: var(--accent);
 }
 
-/* Technical Column */
 .technicalVal {
   font-size: 0.65rem;
   letter-spacing: 0.25rem;
@@ -137,11 +135,11 @@
   max-width: 100px;
 }
 
-/* Bottom Bar */
+
 .bottomBar {
   padding-top: 5vh;
   display: flex;
-  flex-direction: column; /* Force stack for centered alignment */
+  flex-direction: column; 
   gap: 4vh;
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -166,7 +164,7 @@
 .socials {
   display: flex;
   gap: 3rem;
-  justify-content: center; /* Center socials bar */
+  justify-content: center; 
 }
 
 .socialLink {

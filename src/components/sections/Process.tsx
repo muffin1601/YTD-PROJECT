@@ -108,7 +108,7 @@ function ProcessStep({ step, index }: {
           scale,
           rotateX,
           rotateY,
-          perspective: 800 /* More extreme 3D depth */
+          perspective: 800
         }} 
         className={styles.processCard}
       >
